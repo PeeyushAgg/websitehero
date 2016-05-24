@@ -2,7 +2,7 @@ var eventToUse = 'tap';
 $(document).ready(function() {
     makeTemplates();
     var pathname = window.location.pathname;
-    pathname = pathname.slice(1, -1) + 'e';
+    pathname = pathname.slice(1);
     restaurant.getData({}, 'POST', pathname, function(a) {
         $('.loaderContainer').css('visibility', 'collapse')
         $('.mainContainer').css('overflow', 'visible')
