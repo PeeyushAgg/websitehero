@@ -31,3 +31,14 @@ var quotes = [ {
   text : 'It takes an army talented & creative people to execute a successful restaurent.',
   tab : 'EAT WELL BE KIND'
 }]
+var reviewSelecter = [
+  {
+    type : 'typeOne'
+  },
+  {
+    type : 'typeTwo'
+  },
+  {
+    type : 'typeThree'
+  }
+]

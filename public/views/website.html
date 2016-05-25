@@ -14,10 +14,34 @@
   <link href='https://fonts.googleapis.com/css?family=Dancing+Script:400,700' rel='stylesheet' type='text/css'>
   <link href='https://fonts.googleapis.com/css?family=Pinyon+Script|Raleway:400,200,300,500,700,800,900' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" type="text/css" href="../css/website.css">
+  <link rel="stylesheet" type="text/css" href="../css/lightbox.css">
+  <link rel="stylesheet" type="text/css" href="../css/jquery-ui.min.css">
   <link rel="stylesheet" type="text/css" href="../css/websiteScreen.css">
 </head>
 <body>
   <div class="carousalOverlay">
+  </div>
+  <div class="widgetContainer hidden-xs">
+    <div class="widgetNew first">
+      <div class="facebookBtn">
+        <div class="image">
+          <img src="../images/facebook.png">
+        </div>
+        <div class="text hide">
+          Facebook
+        </div>
+      </div>
+    </div>
+    <div class="widgetNew second">
+      <a href="https://twitter.com/share" data - hashtags="MyNewWebsite">
+        <div class="image">
+          <img src="../images/twitter.png">
+        </div>
+        <div class="text hide">
+          Twitter
+        </div>
+      </a>
+    </div>
   </div>
   <div class="mainContainer" >
     <div id='fb-root'></div>
@@ -37,7 +61,7 @@
         </div>
         <div class="aboutDescription">
         </div>
-        <div class="readMore">read more</div>
+        <div class="btnReadMore">read more</div>
       </div>
     </div>
     <div class="paralexPageTwoContainer">
@@ -53,6 +77,8 @@
           </div>
         </div>
       </div>
+    </div>
+    <div class="imageViewer">
     </div>
     <div class="paralexPageThreeContainer">
     </div>
@@ -91,11 +117,11 @@
             <input class="formControl" type="email" placeholder="Your Email Address">
           </div>
           <div class="formGroup">
-            <div class="formHeading">Date and Time:</div>
+            <div class="formHeading">Date:</div>
             <input class="formControl" type="text" placeholder="When do you want to Book">
           </div>
           <div class="formGroup">
-            <div class="formHeading">Your Suggestions:</div>
+            <div class="formHeading">Your Preferences:</div>
             <input class="formControl" type="text" placeholder="How can we help you?">
           </div>
           <div class="btnBooking">
@@ -121,14 +147,39 @@
         <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3503.4504017372415!2d77.31048431508157!3d28.586261982436028!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390ce45f7ea20819%3A0xad1c6b40438f7d41!2sA-35%2C+A+Block%2C+Sector+2%2C+Noida%2C+Uttar+Pradesh+201301%2C+India!5e0!3m2!1sen!2sca!4v1460720608189"
           width="100%" height="100%" allowfullscreen style="pointer-events: none;"></iframe>
     </div>
-    <div class="footerEnd">
-      <div class="container">
-        <div class="leftContent col-sm-6 col-xs-12">
-          Copyright © 2016 Realbox Data Analytics Private Limited
-        </div>
-        <div class="rightContent col-sm-6 col-xs-12">
-          Handcrafted with love by  Team <span style="border-bottom:1px solid #B3AEAE "><a href="http://realbox.in/www1/views/index.html">Realbox</a></span>
+
+        <div class="footerEnd">
+          <div class="leftPart">
+            <div class="logoBlock">
+              <img src="../images/realbox.png" class=realboxLogo>
             </div>
+            <div class="footerText">
+              Make this website yours
+            </div>
+          </div>
+          <div class="rightPart">
+            <div class="btnClaim">
+              claim your site
+            </div>
+          </div>
+        </div>
+        <div class="signUpContainer">
+          <img src="../images/cross.png" class="crossIcon">
+          <div class="header">
+            Sweet! Let's get you started.
+          </div>
+          <div class="signUpFormHeader">
+            <div class="formName">
+              sign up
+            </div>
+          </div>
+          <div class="entryBlock">
+            <input class="entryPlaceholder name" placeholder="enter your name">
+            <input class="entryPlaceholder name" placeholder="enter your email">
+            <input class="entryPlaceholder name" placeholder="enter your password">
+          </div>
+          <div class="btnSignUp">
+            SIGN UP
           </div>
         </div>
       </div>
@@ -172,58 +223,39 @@
           </div>
           <div class="headingName">
           </div>
-          <div class="spoonLogoBlock">
-            <div class="headingLine">
-              <div class="leftLine">
-              </div>
-              <div class="star">
-                *
-              </div>
-              <div class="rightLine">
-              </div>
-            </div>
-          </div>
-          <div class="openingText">
-            OPENING HOUR
-          </div>
-          <div class="normalDays day">
-            Monday - Friday: <span class="time">08:00 AM - 11:00 PM </span>
-          </div>
-          <div class="weekends day">
-            Weekends: <span class="time">08:00 AM - 02:00 PM</span>
-          </div>
         </div>
-        <div class="col-xs-offset-2 col-md-offset-5 col-md-4 socialIconBlock">
-          <div class="feedBlock facebookBtn" >
-            <img src="../images/facebook.png" class="socialLogo">
-          </div>
-          <div class="feedBlock">
-            <a href = "https://twitter.com/share" data - hashtags = "MyNewWebsite">
-            <img src="../images/twitter.png" class="socialLogo twitter-share-button">
-          </a>
-          </div>
-          <div class="feedBlock">
-            <img src="../images/instagram.png" class="socialLogo">
-          </div>
-        </div>
-
       </div>
     </script>
       <script id="paralexPageThreeTemplate" type="text/x-jquery-tmpl">
       <div class="paralexPageThree" style='background : url("{{html image}}") 50% 0 fixed; background-repeat: no-repeat; background-size: cover;'>
         <div class="paralexOverlay">
+        <div class="btnViewMore">
+          VIEW ALL
+        </div>
           <div class="paralexHeading">
             Find Out
             <br/>
             <span class="subHeading">WHAT PEOPLE SAY</span>
           </div>
-          <div class="carousalContainer">
+          <div class="reviewDisplayTypeContainer">
+            <div class="carousalContainer typeOne">
 
+            </div>
+            <div class="reviewDisplayBlock">
+              <div class="typeTwo">
+
+              </div>
+
+              <div class="typeThree">
+
+              </div>
+
+            </div>
           </div>
+
           <div class="reviewContainer">
             <div class="reviewHeading">
               WHAT PEOPLE SAY
-              <img src="../images/cross.png" class="crossIcon">
             </div>
             <div class="reviewContainerBlock">
 
@@ -257,15 +289,27 @@
           {{html tag}}
         </div>
         <div class="storyDescription">
-
+        At {{html name}} we’re passionate about sourcing and serving the best food products possible - from fresh baked goods & prepared foods made in house to specialty products from the island and beyond.
         </div>
       </div>
       </script>
       <script id="imageTemplate" type="text/x-jquery-tmpl">
-        <div class="col-sm-4 col-xs-12 overlay">
-          <div class="block" style="background-image: url('{{html images[3]?images[3].source:images[0].source}}')">
+      {{if (count<8)}} <div class="col-sm-4 col-xs-12 overlay">
+        <div class="block" style="background-image: url('{{html images[3]?images[3].source:images[0].source}}')">
+        </div>
+        </div>
+        {{else}}
+        <div class="col-sm-4 col-xs-12 overlay imageViewerTab">
+          <div class="lastblock">
+            <div class="cameraBlock">
+              <img src="../images/camera.png" class="cameraIcon">
+              <div class="cameraText">
+                {{html total}} Photos
+              </div>
+            </div>
           </div>
         </div>
+        {{/if}}
       </script>
       <script id="contactTemplate" type="text/x-jquery-tmpl">
       <div class="locationHeading">
@@ -296,15 +340,13 @@
       <iframe src="{{html src}}" width="100%" height="100%" allowfullscreen style="pointer-events: none;"></iframe>
       </script>
       <script id="reviewTemplate" type="text/x-jquery-tmpl">
+      {{if (type=='typeOne')}}
       <div id="myCarousel" class="carousel slide" data-ride="carousel">
         <div class="carousel-inner" role="listbox">
         {{each(index, value) user_reviews}}
         {{if (first)}}
           <div class="item active">
             <div class="overlay">
-              <div class="btnViewMore">
-                VIEW ALL
-              </div>
               <div class="block">
                 <img src="{{html image}}" class="memberImage">
                 <div class="memberName">{{html user}}</div>
@@ -315,9 +357,6 @@
           {{else}}
           <div class="item">
             <div class="overlay">
-              <div class="btnViewMore">
-                VIEW ALL
-              </div>
               <div class="block">
                 <img src="{{html image}}" class="memberImage">
                 <div class="memberName">{{html user}}</div>
@@ -329,6 +368,40 @@
           {{/each}}
         </div>
       </div>
+      {{else}}
+      {{if (type=='typeTwo')}}
+      {{each(index, value) user_reviews}}
+      <div class="typeTwoReviewBlock">
+        <div class="upperBlock">
+          {{html review_text}}
+        </div>
+        <div class="lowerBlock">
+          <img src="{{html image}}" class="typeTwoMemberImage">
+          <div class="typeTwoMemberName">
+          {{html user}}
+          </div>
+        </div>
+      </div>
+      {{/each}}
+      {{else}}
+      {{each(index, value) user_reviews}}
+      <div class="typeThreeReviewBlock">
+        <div class="leftBlock">
+          <img src="{{html image}}" class="typeThreeMemberImage">
+        </div>
+        <div class="rightBlock">
+          <img src="../images/quotes.png" class="quotesIcon">
+          <div class="typeThreeMemberReview">
+            {{html review_text}}
+          </div>
+          <div class="typeThreeMemberName">
+            {{html user}}
+          </div>
+        </div>
+      </div>
+      {{/each}}
+      {{/if}}
+      {{/if}}
       </script>
 
       <script id="eventTemplate" type="text/x-jquery-tmpl">
@@ -356,32 +429,65 @@
                 {{html address}}
               </div>
             </div>
-              <div class="btnBookEvent">
+              <div class="btnBookEvent" data-id="{{html name}}">
                   BOOK NOW
             </div>
           </div>
         </div>
         {{/each}}
         <div class="confirmationContainer">
-          <div class="detailContainer">
-            <input class="placeholder name" placeholder="enter your name">
-            <input class="placeholder number" placeholder="enter your contact number" type="number" maxlength="10">
-            <input class="placeholder person" placeholder="enter number of person" type="number">
+
+        </div>
+        </div>
+        </div>
+      </script>
+      <script id="confirmationTemplate" type="text/x-jquery-tmpl">
+      <div class="backEventImage" style = "background-image: url('{{html image}}');">
+        <div class="eventShortDesctiption">
+          <div class="eventName">
+          {{html name}}
           </div>
-          <div class="btnConfirm">
-            I AM IN
+          <div class="eventDate">
+          {{html start_time}}
           </div>
-          <div class="target"></div>
-          <div class="thankYouContainer">
-            <div class="thankYou">
-              Thank You <span class="name"></span>,
-              <br>
-              <span class="subDescription"> We will get back to you shortly.</span>
+        </div>
+      </div>
+      <div class="eventDetailConatiner">
+            <div class="detailContainer">
+              <input class="placeholder name" placeholder="enter your name">
+              <input class="placeholder number" placeholder="enter your contact number" type="number" maxlength="10">
             </div>
-          </div>
+            <div class="selectPersonContainer">
+              <div class="text">
+                Select number of person
+              </div>
+              <div class="personBarContainer">
+                <div class="numberBlock">
+                  1
+                </div>
+                <div class="numberBlock">
+                  2
+                </div>
+                <div class="numberBlock">
+                  3
+                </div>
+                <div class="numberBlock">
+                  4+
+                </div>
+              </div>
+            </div>
         </div>
+        <div class="btnConfirm">
+          I AM IN
         </div>
-        </div>
+        <div class="target"></div>
+        <div class="thankYouContainer">
+          <div class="thankYou">
+            Thank You <span class="name"></span>,
+    <br>
+    <span class="subDescription"> We will get back to you shortly.</span>
+    </div>
+    </div>
       </script>
       <script id='allReviewsTemplate' type="text/x-jquery-tmpl">
       <div class="reviewBlock">
@@ -400,11 +506,32 @@
       <div class="paralexPageOne" style='background : url("{{html image}}") 50% 0 fixed; background-repeat: no-repeat; background-size: cover;'>
       </div>
       </script>
+      <script id='imageViewerTemplate' type="text/x-jquery-tmpl">
+      <div class="preBtn"></div>
+      <div class="cross"> <img src="../images/cross.png" class="crossIcon"></div>
+      <div class="viewer">
+      {{each(index,value) data}}
+      {{if (count==0)}}
+        <div id="image{{html count}}" data-id='{{html count}}' class="viewer-image activeImage">
+          <img src="{{html images[3]?images[3].source:images[0].source}}" id='imageImg{{html count}}' class="image activeImg"/>
+          <cite></cite>
+        </div>
+      {{else}}
+      <div id="image{{html count}}" data-id='{{html count}}' class="viewer-image">
+        <img src="{{html images[3]?images[3].source:images[0].source}}" id='imageImg{{html count}}' class="image"/>
+        <cite></cite>
+      </div>
+      {{/if}}
+      {{/each}}
+      </div>
+      <div class="nextBtn"></div>
+      </script>
       <script src="../scripts/jquery.js"></script>
       <script src="../scripts/transit.js"></script>
       <script src="../scripts/bootstrap.min.js"></script>
       <script src="../scripts/highcharts.js"></script>
       <script src="../scripts/jquery.tmpl.min.js"></script>
+      <script src="../scripts/jquery-ui.min.js"></script>
       <script src="../scripts/jslinq.js"></script>
       <script src="../scripts/moment.min.js"></script>
       <script src="../scripts/superjson.js"></script>
@@ -413,6 +540,7 @@
       <script src="../js/base.js"></script>
       <script src="../js/restaurant.js"></script>
       <script src="../js/website.js"></script>
+      <script src="../js/lightbox.js"></script>
 </body>
 
 </html>

@@ -1,4 +1,6 @@
 var eventToUse = 'tap';
+var geocoder;
+var map;
 $(document).ready(function() {
     makeTemplates();
     var pathname = window.location.pathname;
@@ -20,12 +22,33 @@ $(document).ready(function() {
         }
         loadFbApi(a.data.fb.picture.data.url)
     })
+    $('.widgetNew').mouseenter(function(){
+        $(this).css('width','13rem');
+        $(this).find('.text').removeClass('hide');
+
+    })
+    $('.widgetNew').mouseleave(function(){
+        $(this).css('width','4rem');
+        $(this).find('.text').addClass('hide');
+    })
+    bind('.btnClaim', function(){
+      $('.signUpContainer').css('display','block');
+      $('.carousalOverlay').css('display', 'block');
+      $('.mainContainer').css('overflow-y', 'hidden');
+      $(".signUpContainer").get(0).scrollIntoView();
+      bind('.crossIcon', function(){
+        $('.signUpContainer').css('display','none');
+        $('.carousalOverlay').css('display', 'none');
+        $('.mainContainer').css('overflow-y', 'visible');
+        $(".signUpContainer").get(0).scrollIntoView();
+      })
+    });
     $('.restaurantNameBlock').css('float', 'left')
-    bind('.readMore', function() {
-        $('.readMore').css('visibility', 'hidden')
+    bind('.btnReadMore', function() {
         $('.aboutDescription').css('height', 'auto')
         $('.aboutDescription').css('max-height', '40rem')
-        $('.aboutDescription').css('-webkit-line-clamp', 'initial')
+        $('.btnReadMore').css('visibility', 'hidden')
+        $('.btnReadMore').css('height', '0rem')
         $('.aboutDescription').css('overflow', 'visible')
     })
     bind('.btnBooking', function() {
@@ -61,9 +84,9 @@ function renderFbZomatoData(r) {
         render(".aboutDescription", "restaurantName", {
             name: r.fb.about
         });
-    if ($('.aboutDescription').height() < 88) {
-        $('.readMore').css('visibility', 'hidden')
-    }
+        if ($('.aboutDescription').height() < 70) {
+            $('.btnReadMore').css('visibility', 'hidden')
+        }
     if (r.fb.hours) {
 
     } else {
@@ -72,29 +95,13 @@ function renderFbZomatoData(r) {
     r.fb.photos = {
         data: []
     }
-    if ((r.fb.albums.data[0] && r.fb.albums.data[1] && r.fb.albums.data[0].photos.data.length + r.fb.albums.data[1].photos.data.length > 9) || (r.fb.albums.data[0] && r.fb.albums.data[0].photos.data.length > 9)) {
-        var j = 0
-        var k = 0
-        for (var i = 0; i < 9; i++) {
-            if (r.fb.albums.data[0] && r.fb.albums.data[0].photos.data.length > j) {
-                r.fb.photos.data.push(r.fb.albums.data[0].photos.data[j])
-                j++
-            } else if (r.fb.albums.data[1] && r.fb.albums.data[1].photos.data.length > k) {
-                r.fb.photos.data.push(r.fb.albums.data[1].photos.data[j])
-                k++
-            }
-        }
-    } else {
-        r.fb.photos.data.push({
-            images: [{
-                source: r.zomato.restaurant.featured_image
-            }]
-        })
-        r.fb.photos.data.push({
-            images: [{
-                source: r.zomato.restaurant.thumb
-            }]
-        })
+    var count = 0
+    for(var v of r.fb.albums.data){
+      for(var u of v.photos.data){
+        u.count = count
+        r.fb.photos.data.push(u)
+        count++
+      }
     }
     console.log(r);
     render(".paralexPageOneContainer", "paralexPage", {
@@ -111,7 +118,77 @@ function renderFbZomatoData(r) {
       quote: quotes[Math.floor((Math.random() * 5))].text,
       name: r.fb.name
     })
-    render(".imageContainer", "image", r.fb.photos.data);
+    if(r.fb.photos.data.length>9){
+      r.fb.photos.data[8].total = r.fb.photos.data.length
+    }
+    console.log(r.fb.photos.data[8]);
+    render(".imageContainer", "image", r.fb.photos.data.length<=9?r.fb.photos.data:r.fb.photos.data.slice(0, 9));
+    if(r.fb.photos.data.length>9){
+    bind('.imageViewerTab', function(){
+      $(".imageViewer").css('display','block')
+      $('.carousalOverlay').css('display', 'block');
+      $('.mainContainer').css('overflow-y', 'hidden');
+      $(".imageViewer").get(0).scrollIntoView();
+      render(".imageViewer", "imageViewer", {data:r.fb.photos.data})
+      bind('.nextBtn',function(){
+        var id = $('.activeImage').attr('data-id')
+        if(id<r.fb.photos.data.length-1){
+        $('#image'+id).removeClass('activeImage')
+        $('#imageImg'+id).removeClass('activeImg')
+        id++
+        $('#image'+id).addClass('activeImage')
+        $('#imageImg'+id).addClass('activeImg')
+      }
+      })
+      bind('.cross', function(){
+        $('.imageViewer').css('display','none');
+        $('.carousalOverlay').css('display', 'none');
+        $('.mainContainer').css('overflow-y', 'visible');
+        $(".imageContainer").get(0).scrollIntoView();
+      })
+      bind('.preBtn',function(){
+        var id = $('.activeImage').attr('data-id')
+        if(id>0){
+        $('#image'+id).removeClass('activeImage')
+        $('#imageImg'+id).removeClass('activeImg')
+        id--
+        $('#image'+id).addClass('activeImage')
+        $('#imageImg'+id).addClass('activeImg')
+      }
+      })
+  })
+  }
+    renderReviews(r.zomato.reviews)
+    r.zomato.address = ''
+    r.zomato.street = ''
+    r.fb.address = ''
+    if (r.zomato.restaurant.location) {
+        if (r.zomato.restaurant.location.address) {
+            r.zomato.street += r.zomato.restaurant.location.address
+        }
+        if (r.fb.location && r.fb.location.country) {
+            r.fb.address += r.fb.location.country
+        }
+        if (r.fb.location && r.fb.location.zip) {
+            if (r.fb.address != '')
+                r.fb.address += ','
+            r.fb.address += r.fb.location.zip
+        }
+        console.log(r.fb);
+        render(".addressBlock", "address", {
+            address: r.fb.address,
+            street: r.zomato.street
+        })
+        var mapUrl
+      if( r.zomato.restaurant.location.latitude<1&&r.fb.location&&r.fb.location.latitude){
+          mapUrl = "https://maps.google.com/maps?q=" + r.fb.location.latitude + "," + r.fb.location.longitude + "&hl=es;z=14&amp;output=embed";
+        }else{
+        mapUrl = "https://maps.google.com/maps?q=" + r.zomato.restaurant.location.latitude + "," + r.zomato.restaurant.location.longitude + "&hl=es;z=14&amp;output=embed";
+      }
+      render(".mapPage", "map", {
+            src: mapUrl
+        })
+    }
     renderReviews(r.zomato.reviews)
     r.zomato.address = ''
     r.zomato.street = ''
@@ -268,43 +345,25 @@ function renderFbZomatoFourSquare(r){
         render(".aboutDescription", "restaurantName", {
             name: r.fb.about
         });
-    if ($('.aboutDescription').height() < 88) {
-        $('.readMore').css('visibility', 'hidden')
-    }
+        if ($('.aboutDescription').height() < 70) {
+            $('.btnReadMore').css('visibility', 'hidden')
+        }
   r.fb.photos = {
       data: []
   }
+  var count = 0
   if(r.foursquare.photos){
     for(var u of  r.foursquare.photos.groups[0].items){
-      console.log("----------");
-      console.log(r);
-    r.fb.photos.data.push({images:[{source:u.prefix+'800x800'+u.suffix}]})
+    r.fb.photos.data.push({images:[{source:u.prefix+'800x800'+u.suffix}],count:count})
+    count++
   }
   }
-  var r_length = r.fb.photos.data.length
-  if ((r.fb.albums.data[0] && r.fb.albums.data[1] && r.fb.albums.data[0].photos.data.length + r.fb.albums.data[1].photos.data.length > 9) || (r.fb.albums.data[0] && r.fb.albums.data[0].photos.data.length > 9)) {
-      var j = 0
-      var k = 0
-      for (var i = 0; i < 9-r_length; i++) {
-          if (r.fb.albums.data[0] && r.fb.albums.data[0].photos.data.length > j) {
-              r.fb.photos.data.push(r.fb.albums.data[0].photos.data[j])
-              j++
-          } else if (r.fb.albums.data[1] && r.fb.albums.data[1].photos.data.length > k) {
-              r.fb.photos.data.push(r.fb.albums.data[1].photos.data[j])
-              k++
-          }
-      }
-  } else {
-      r.fb.photos.data.push({
-          images: [{
-              source: r.zomato.restaurant.featured_image
-          }]
-      })
-      r.fb.photos.data.push({
-          images: [{
-              source: r.zomato.restaurant.thumb
-          }]
-      })
+  for(var v of r.fb.albums.data){
+    for(var u of v.photos.data){
+      u.count = count
+      r.fb.photos.data.push(u)
+      count++
+    }
   }
   console.log(r);
   render(".paralexPageOneContainer", "paralexPage", {
@@ -321,7 +380,47 @@ function renderFbZomatoFourSquare(r){
     quote: quotes[Math.floor((Math.random() * 5))].text,
     name: r.fb.name
   })
-  render(".imageContainer", "image", r.fb.photos.data);
+  if(r.fb.photos.data.length>9){
+    r.fb.photos.data[8].total = r.fb.photos.data.length
+  }
+  console.log(r.fb.photos.data[8]);
+
+  render(".imageContainer", "image", r.fb.photos.data.length<=9?r.fb.photos.data:r.fb.photos.data.slice(0, 9));
+  if(r.fb.photos.data.length>9){
+  bind('.imageViewerTab', function(){
+    $(".imageViewer").css('display','block')
+    $('.carousalOverlay').css('display', 'block');
+    $('.mainContainer').css('overflow-y', 'hidden');
+    $(".imageViewer").get(0).scrollIntoView();
+    render(".imageViewer", "imageViewer", {data:r.fb.photos.data})
+    bind('.nextBtn',function(){
+      var id = $('.activeImage').attr('data-id')
+      if(id<r.fb.photos.data.length-1){
+      $('#image'+id).removeClass('activeImage')
+      $('#imageImg'+id).removeClass('activeImg')
+      id++
+      $('#image'+id).addClass('activeImage')
+      $('#imageImg'+id).addClass('activeImg')
+    }
+    })
+    bind('.cross', function(){
+      $('.imageViewer').css('display','none');
+      $('.carousalOverlay').css('display', 'none');
+      $('.mainContainer').css('overflow-y', 'visible');
+      $(".imageContainer").get(0).scrollIntoView();
+    })
+    bind('.preBtn',function(){
+      var id = $('.activeImage').attr('data-id')
+      if(id>0){
+      $('#image'+id).removeClass('activeImage')
+      $('#imageImg'+id).removeClass('activeImg')
+      id--
+      $('#image'+id).addClass('activeImage')
+      $('#imageImg'+id).addClass('activeImg')
+    }
+    })
+})
+}
   renderReviews(r.zomato.reviews)
   r.zomato.address = ''
   r.zomato.street = ''
@@ -343,10 +442,8 @@ function renderFbZomatoFourSquare(r){
           address: r.fb.address,
           street: r.zomato.street
       })
-      var mapUrl = ''
-      if(r.fb.address&&r.zomato.street){
-        mapUrl = "https://www.google.com/maps/embed/v1/place?q=" + r.zomato.street + r.fb.address+ "&key=AIzaSyDJWPGhfAQJGwGC3OOELU4kgdABZGs3AeU";
-      }else if( r.zomato.restaurant.location.latitude<1&&r.fb.location&&r.fb.location.latitude){
+      var mapUrl
+    if( r.zomato.restaurant.location.latitude<1&&r.fb.location&&r.fb.location.latitude){
         mapUrl = "https://maps.google.com/maps?q=" + r.fb.location.latitude + "," + r.fb.location.longitude + "&hl=es;z=14&amp;output=embed";
       }else{
       mapUrl = "https://maps.google.com/maps?q=" + r.zomato.restaurant.location.latitude + "," + r.zomato.restaurant.location.longitude + "&hl=es;z=14&amp;output=embed";
@@ -373,7 +470,13 @@ function renderReviews(data) {
             r.review_text = r.review.review_text
             r.user = r.review.user.name
         }
-        render(".carousalContainer", "review", data);
+        data.type = reviewSelecter[Math.floor((Math.random() * 3))].type
+        if(data.type == 'typeOne'){
+          render("."+data.type, "review", data);
+        }else{
+          render("."+data.type, "review", {type:data.type,user_reviews:data.user_reviews.slice(0,4)});
+        }
+          $("."+data.type).css('display','block')
         bind('.btnViewMore', function() {
             $('.carousalOverlay').css('display', 'block');
             $('.mainContainer').css('overflow-y', 'hidden');
@@ -381,11 +484,11 @@ function renderReviews(data) {
             $('.reviewContainerBlock').scrollTop()
             render('.reviewContainerBlock', 'allReviews', data.user_reviews)
             $('.reviewContainer').addClass('slideUp');
-            bind('.crossIcon', function() {
+            bind('.carousalOverlay', function() {
                 $('.mainContainer').css('overflow-y', 'visible');
+                $('.carousalOverlay').css('display', 'none');
                 $(".carousalContainer").get(0).scrollIntoView();
                 $('.reviewContainer').removeClass('slideUp');
-                $('.carousalOverlay').css('display', 'none');
             })
         });
     }
@@ -425,17 +528,34 @@ function renderEvents(events) {
         if (i == events.length - 1) {
             console.log(obj);
             render('.eventPage', 'event', obj)
-            bind('.btnBookEvent', showConfirmationContainer);
+            bind('.btnBookEvent', function(){showConfirmationContainer($(this).attr('data-id'),events)});
         }
     }
 }
 
-function showConfirmationContainer() {
-    $('.confirmationContainer').addClass('slideConfirmationScreen');
-    $('.carousalOverlay').css('display', 'block');
-    $('.mainContainer').css('overflow-y', 'hidden');
-    $(".eventContainer").get(0).scrollIntoView();
-    bind('.btnConfirm', showThankYouContainer)
+function showConfirmationContainer(id,events) {
+  var data = JSLINQ(events)
+    .Where(function(x){
+      return (x.name == id)
+    }).items[0];
+  $('.confirmationContainer').addClass('slideConfirmationScreen');
+  render('.confirmationContainer','confirmation',data)
+  $('.carousalOverlay').css('display', 'block');
+  $('.mainContainer').css('overflow-y', 'hidden');
+  $(".eventContainer").get(0).scrollIntoView();
+
+  bind('.numberBlock', function showSelectedNumber() {
+    $('.numberBlock').removeClass('selectedNumber');
+    $(this).addClass('selectedNumber');
+  });
+
+  bind('.btnConfirm', showThankYouContainer)
+  bind('.carousalOverlay', function(){
+    $('.confirmationContainer').removeClass('slideConfirmationScreen');
+    $('.mainContainer').css('overflow-y', 'visible');
+    $(".eventPage").get(0).scrollIntoView();
+    $('.carousalOverlay').css('display', 'none');
+  })
 }
 
 function showThankYouContainer() {
@@ -451,7 +571,7 @@ function showThankYouContainer() {
             $('.thankYouContainer').removeClass('fadeIn');
             $('.mainContainer').css('overflow-y', 'visible');
             $('.carousalOverlay').css('display', 'none');
-            $(".carousalContainer").get(0).scrollIntoView();
+            $(".eventPage").get(0).scrollIntoView();
             $('.placeholder').val('');
         }, 1500);
     } else {

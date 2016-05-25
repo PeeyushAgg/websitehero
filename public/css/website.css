@@ -4,6 +4,7 @@ html {
 body {
   margin: 0;
   font-size: 1.6rem;
+  font-family: 'Raleway', sans-serif;
 }
 a {
   text-decoration: none;
@@ -38,9 +39,53 @@ input[type=number]::-webkit-outter-spin-button {
   z-index: 1000;
   display: none;
 }
+.widgetContainer {
+  position: fixed;
+  top: 17.5rem;
+  right: 0;
+  height: 100%;
+  z-index: 10;
+  text-transform: uppercase;
+  font-size: 1.2rem;
+}
+.widgetContainer .widgetNew {
+  position: absolute;
+  right: 0;
+  border-top-left-radius: 0.4rem;
+  border-bottom-left-radius: 0.4rem;
+  height: 4rem;
+  width: 4rem;
+  color: white;
+  cursor: pointer;
+}
+.widgetContainer .widgetNew .image {
+  position: relative;
+  float: left;
+}
+.widgetContainer .widgetNew .image img {
+  height: 2rem;
+  position: relative;
+  left: 1rem;
+  top: 1rem;
+}
+.widgetContainer .widgetNew .text {
+  position: relative;
+  float: right;
+  line-height: 4rem;
+  color: white;
+  padding-right: 0.8rem;
+}
+.widgetContainer .widgetNew.first {
+  background: #3a5795;
+  top: 4rem;
+}
+.widgetContainer .widgetNew.second {
+  background: #1da1f2;
+  top: 8.2rem;
+}
 .mainContainer {
   position: absolute;
-  font-family: 'Lato', sans-serif;
+  font-family: 'Raleway', sans-serif;
   height: 100%;
   width: 100%;
   overflow: hidden;
@@ -65,6 +110,7 @@ input[type=number]::-webkit-outter-spin-button {
   float: left;
   height: 70rem;
   width: 100%;
+  background-image: url("../images/back1.jpg");
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
@@ -116,53 +162,6 @@ input[type=number]::-webkit-outter-spin-button {
   letter-spacing: 2px;
   padding-bottom: 2rem;
 }
-.mainContainer .welcomePage .centerTextBlock .spoonLogoBlock {
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-}
-.mainContainer .welcomePage .centerTextBlock .spoonLogoBlock .headingLine {
-  position: relative;
-  float: left;
-  height: 14px;
-  margin-left: -30px;
-  width: 280px;
-}
-.mainContainer .welcomePage .centerTextBlock .spoonLogoBlock .headingLine .leftLine {
-  position: absolute;
-  border: 1px solid white;
-  width: 135px;
-}
-.mainContainer .welcomePage .centerTextBlock .spoonLogoBlock .headingLine .star {
-  color: #ffffff;
-  position: absolute;
-  left: 145px;
-  font-size: 35px;
-  top: -16px;
-}
-.mainContainer .welcomePage .centerTextBlock .spoonLogoBlock .headingLine .rightLine {
-  position: absolute;
-  border: 1px solid white;
-  width: 135px;
-  left: 165px;
-}
-.mainContainer .welcomePage .centerTextBlock .openingText {
-  position: relative;
-  font-size: 1.6rem;
-  color: white;
-  font-weight: 700;
-  padding-top: 2.5rem;
-  padding-bottom: 1rem;
-}
-.mainContainer .welcomePage .centerTextBlock .day {
-  color: white;
-  font-size: 1.5rem;
-  padding-top: 1rem;
-}
-.mainContainer .welcomePage .centerTextBlock .time {
-  color: #FBFBFB;
-  font-size: 1.5rem;
-}
 .mainContainer .welcomePage .socialIconBlock {
   position: absolute;
   bottom: 5rem;
@@ -200,7 +199,7 @@ input[type=number]::-webkit-outter-spin-button {
 .mainContainer .storyPage .storyHeading {
   position: relative;
   padding-top: 6rem;
-  font-size: 4.6rem;
+  font-size: 3rem;
   color: #3b4140;
   font-weight: 500;
 }
@@ -229,35 +228,37 @@ input[type=number]::-webkit-outter-spin-button {
 }
 .mainContainer .aboutPage .aboutHeading {
   position: relative;
-  font-size: 4.6rem;
+  font-size: 3rem;
   color: #3b4140;
   font-weight: 500;
 }
 .mainContainer .aboutPage .aboutDescription {
   position: relative;
-  padding: 1.6rem;
-  max-height: 13rem;
+  padding: 4rem 1.6rem 1.6rem;
+  max-height: 17rem;
   overflow: hidden;
-  font-size: 2rem;
+  font-size: 1.6rem;
   color: #3b4140;
   display: block;
-  display: -webkit-box;
-  -webkit-line-clamp: 4;
-  -webkit-box-orient: vertical;
-  text-overflow: ellipsis;
+  -webkit-column-count: 2;
+  -webkit-column-gap: 40px;
+  text-align: justify;
 }
-.mainContainer .aboutPage .readMore {
+.mainContainer .aboutPage .btnReadMore {
   position: relative;
-  float: right;
+  margin: 0 auto;
   height: 4rem;
   line-height: 4rem;
   width: 14rem;
   text-transform: uppercase;
-  text-align: right;
+  text-align: center;
   color: #dfa240;
   font-size: 1.4rem;
-  cursor: pointer;
   font-weight: 600;
+  margin-top: 2rem;
+  cursor: pointer;
+  z-index: 50;
+  border: 1px solid #dfa240;
 }
 .mainContainer .paralexPageTwo {
   position: relative;
@@ -272,7 +273,7 @@ input[type=number]::-webkit-outter-spin-button {
   position: relative;
   float: left;
   width: 100%;
-  height: 55rem;
+  height: 70rem;
   background: url("../images/menu2_bg.jpg") 50% 0 fixed;
   background-repeat: no-repeat;
   background-size: cover;
@@ -282,6 +283,23 @@ input[type=number]::-webkit-outter-spin-button {
   height: 100%;
   width: 100%;
   background: rgba(0, 0, 0, 0.5);
+}
+.mainContainer .paralexPageThree .paralexOverlay .btnViewMore {
+  position: absolute;
+  bottom: 4rem;
+  height: 4rem;
+  line-height: 4rem;
+  width: 14rem;
+  text-transform: uppercase;
+  text-align: center;
+  color: #dfa240;
+  font-size: 1.4rem;
+  cursor: pointer;
+  font-weight: 600;
+  left: 50%;
+  z-index: 500;
+  transform: translateX(-50%);
+  border: 1px solid #dfa240;
 }
 .mainContainer .paralexPageThree .paralexOverlay .paralexHeading {
   position: relative;
@@ -309,7 +327,7 @@ input[type=number]::-webkit-outter-spin-button {
   position: fixed;
   top: 50%;
   left: 50%;
-  height: 100%;
+  height: 60rem;
   width: 70rem;
   visibility: hidden;
   background-color: white;
@@ -403,26 +421,160 @@ input[type=number]::-webkit-outter-spin-button {
   opacity: 1;
   visibility: visible;
 }
-.mainContainer .paralexPageThree .paralexOverlay .carousalContainer {
+.mainContainer .paralexPageThree .paralexOverlay .reviewDisplayTypeContainer {
+  position: relative;
+  float: left;
+  height: 44rem;
+  width: 100%;
+}
+.mainContainer .paralexPageThree .paralexOverlay .reviewDisplayTypeContainer .reviewDisplayBlock {
   position: absolute;
-  height: 30rem;
+  height: 40rem;
+  top: 2rem;
+  width: 90rem;
+  left: 50%;
+  -webkit-transform: translate(-50%);
+  padding: 0 3rem;
+}
+.mainContainer .paralexPageThree .paralexOverlay .reviewDisplayTypeContainer .reviewDisplayBlock .typeTwo {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  display: none;
+}
+.mainContainer .paralexPageThree .paralexOverlay .reviewDisplayTypeContainer .reviewDisplayBlock .typeTwo .typeTwoReviewBlock {
+  position: relative;
+  float: left;
+  padding: 2rem;
+  height: 18rem;
+  width: 47%;
+  background: #E3F2FD;
+  border-radius: 10px;
+  text-align: left;
+  margin-left: 1.8rem;
+  margin-top: 1.8rem;
+}
+.mainContainer .paralexPageThree .paralexOverlay .reviewDisplayTypeContainer .reviewDisplayBlock .typeTwo .typeTwoReviewBlock .upperBlock {
+  position: relative;
+  float: left;
+  height: 57%;
+  width: 100%;
+  font-size: 1.4rem;
+  display: block;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+.mainContainer .paralexPageThree .paralexOverlay .reviewDisplayTypeContainer .reviewDisplayBlock .typeTwo .typeTwoReviewBlock .lowerBlock {
+  position: relative;
+  float: left;
+  margin-top: 1rem;
+  height: 35%;
+  width: 100%;
+}
+.mainContainer .paralexPageThree .paralexOverlay .reviewDisplayTypeContainer .reviewDisplayBlock .typeTwo .typeTwoReviewBlock .lowerBlock .typeTwoMemberImage {
+  position: relative;
+  float: left;
+  height: 4rem;
+  width: 4rem;
+  border-radius: 50%;
+}
+.mainContainer .paralexPageThree .paralexOverlay .reviewDisplayTypeContainer .reviewDisplayBlock .typeTwo .typeTwoReviewBlock .lowerBlock .typeTwoMemberName {
+  position: relative;
+  float: left;
+  padding-left: 1.5rem;
+  font-weight: 500;
+}
+.mainContainer .paralexPageThree .paralexOverlay .reviewDisplayTypeContainer .reviewDisplayBlock .typeThree {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  display: none;
+}
+.mainContainer .paralexPageThree .paralexOverlay .reviewDisplayTypeContainer .reviewDisplayBlock .typeThree .typeThreeReviewBlock {
+  position: relative;
+  float: left;
+  padding: 2rem;
+  height: 18rem;
+  width: 47%;
+  background: #E3F2FD;
+  border-radius: 10px;
+  text-align: left;
+  margin-left: 1.8rem;
+  margin-top: 1.8rem;
+}
+.mainContainer .paralexPageThree .paralexOverlay .reviewDisplayTypeContainer .reviewDisplayBlock .typeThree .typeThreeReviewBlock .leftBlock {
+  position: relative;
+  float: left;
+  height: 100%;
+  width: 20%;
+}
+.mainContainer .paralexPageThree .paralexOverlay .reviewDisplayTypeContainer .reviewDisplayBlock .typeThree .typeThreeReviewBlock .leftBlock .typeThreeMemberImage {
+  position: relative;
+  float: left;
+  height: 5rem;
+  width: 5rem;
+  margin-top: 3rem;
+  border-radius: 50%;
+}
+.mainContainer .paralexPageThree .paralexOverlay .reviewDisplayTypeContainer .reviewDisplayBlock .typeThree .typeThreeReviewBlock .rightBlock {
+  position: relative;
+  float: left;
+  height: 100%;
+  width: 80%;
+  font-size: 1.4rem;
+}
+.mainContainer .paralexPageThree .paralexOverlay .reviewDisplayTypeContainer .reviewDisplayBlock .typeThree .typeThreeReviewBlock .rightBlock .quotesIcon {
+  position: relative;
+  float: left;
+  width: auto;
+  height: 2.5rem;
+}
+.mainContainer .paralexPageThree .paralexOverlay .reviewDisplayTypeContainer .reviewDisplayBlock .typeThree .typeThreeReviewBlock .rightBlock .typeThreeMemberReview {
+  position: absolute;
+  top: 0;
+  height: 9rem;
+  padding-left: 3.5rem;
+  font-size: 1.6rem;
+  display: block;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+.mainContainer .paralexPageThree .paralexOverlay .reviewDisplayTypeContainer .reviewDisplayBlock .typeThree .typeThreeReviewBlock .rightBlock .typeThreeMemberName {
+  position: absolute;
+  top: 9rem;
+  bottom: 0;
+  padding-top: 1.5rem;
+  width: 100%;
+  text-align: center;
+  font-size: 1.6rem;
+  font-weight: 500;
+}
+.mainContainer .paralexPageThree .paralexOverlay .reviewDisplayTypeContainer .carousalContainer {
+  position: absolute;
+  height: 40rem;
   width: 70rem;
-  bottom: 6rem;
+  bottom: 0;
   left: 50%;
   font-family: 'Raleway', sans-serif;
   -webkit-transform: translate(-50%);
 }
-.mainContainer .paralexPageThree .paralexOverlay .carousalContainer .carousel {
+.mainContainer .paralexPageThree .paralexOverlay .reviewDisplayTypeContainer .carousalContainer .carousel {
   height: 100% !important;
   width: 100% !important;
 }
-.mainContainer .paralexPageThree .paralexOverlay .carousalContainer .carousel-inner {
+.mainContainer .paralexPageThree .paralexOverlay .reviewDisplayTypeContainer .carousalContainer .carousel-inner {
   height: 100%;
   overflow: hidden;
   -webkit-transform: all 1s;
 }
-.mainContainer .paralexPageThree .paralexOverlay .carousalContainer .carousel-inner > .item > a > img,
-.mainContainer .paralexPageThree .paralexOverlay .carousalContainer .carousel-inner > .item > img {
+.mainContainer .paralexPageThree .paralexOverlay .reviewDisplayTypeContainer .carousalContainer .carousel-inner > .item > a > img,
+.mainContainer .paralexPageThree .paralexOverlay .reviewDisplayTypeContainer .carousalContainer .carousel-inner > .item > img {
   width: 100%;
   margin: auto;
   height: 100%;
@@ -430,25 +582,10 @@ input[type=number]::-webkit-outter-spin-button {
   background-size: cover;
   background-repeat: no-repeat;
 }
-.mainContainer .paralexPageThree .paralexOverlay .carousalContainer .btnViewMore {
-  position: absolute;
-  right: 2rem;
-  bottom: 0;
-  height: 4rem;
-  line-height: 4rem;
-  width: 14rem;
-  text-transform: uppercase;
-  text-align: right;
-  color: #dfa240;
-  font-size: 1.4rem;
-  cursor: pointer;
-  font-weight: 600;
-  z-index: 120;
-}
-.mainContainer .paralexPageThree .paralexOverlay .carousalContainer .item {
+.mainContainer .paralexPageThree .paralexOverlay .reviewDisplayTypeContainer .carousalContainer .item {
   height: 100% !important;
 }
-.mainContainer .paralexPageThree .paralexOverlay .carousalContainer .item .overlay {
+.mainContainer .paralexPageThree .paralexOverlay .reviewDisplayTypeContainer .carousalContainer .item .overlay {
   position: absolute;
   height: 100%;
   width: 100%;
@@ -457,49 +594,50 @@ input[type=number]::-webkit-outter-spin-button {
   display: table;
   text-align: center;
 }
-.mainContainer .paralexPageThree .paralexOverlay .carousalContainer .item .overlay .block {
+.mainContainer .paralexPageThree .paralexOverlay .reviewDisplayTypeContainer .carousalContainer .item .overlay .block {
   position: relative;
   color: white;
   vertical-align: middle;
   display: table-cell;
 }
-.mainContainer .paralexPageThree .paralexOverlay .carousalContainer .item .overlay .block .memberImage {
+.mainContainer .paralexPageThree .paralexOverlay .reviewDisplayTypeContainer .carousalContainer .item .overlay .block .memberImage {
   position: relative;
   height: 8rem;
   width: 8rem;
   border-radius: 50%;
 }
-.mainContainer .paralexPageThree .paralexOverlay .carousalContainer .item .overlay .block .memberReview {
+.mainContainer .paralexPageThree .paralexOverlay .reviewDisplayTypeContainer .carousalContainer .item .overlay .block .memberReview {
   font-size: 2rem;
-  height: 10rem;
+  height: 18rem;
   font-weight: 300;
   padding: 1.5rem;
   overflow: hidden;
   display: block;
   display: -webkit-box;
-  -webkit-line-clamp: 3;
+  text-align: justify;
+  -webkit-line-clamp: 6;
   -webkit-box-orient: vertical;
   text-overflow: ellipsis;
 }
-.mainContainer .paralexPageThree .paralexOverlay .carousalContainer .item .overlay .block .memberName {
+.mainContainer .paralexPageThree .paralexOverlay .reviewDisplayTypeContainer .carousalContainer .item .overlay .block .memberName {
   color: #dfa240;
   font-weight: 600;
   padding-top: 1rem;
   font-size: 1.8rem;
 }
-.mainContainer .paralexPageThree .paralexOverlay .carousalContainer .white {
+.mainContainer .paralexPageThree .paralexOverlay .reviewDisplayTypeContainer .carousalContainer .white {
   -webkit-transform: all 0.6s;
 }
-.mainContainer .paralexPageThree .paralexOverlay .carousalContainer .white:hover {
+.mainContainer .paralexPageThree .paralexOverlay .reviewDisplayTypeContainer .carousalContainer .white:hover {
   display: none;
 }
-.mainContainer .paralexPageThree .paralexOverlay .carousalContainer .carousel-indicators .active {
+.mainContainer .paralexPageThree .paralexOverlay .reviewDisplayTypeContainer .carousalContainer .carousel-indicators .active {
   width: 16px;
   height: 16px;
   margin: 0;
   background-color: #d5232e;
 }
-.mainContainer .paralexPageThree .paralexOverlay .carousalContainer .carousel-indicators li {
+.mainContainer .paralexPageThree .paralexOverlay .reviewDisplayTypeContainer .carousalContainer .carousel-indicators li {
   display: inline-block;
   width: 15px;
   height: 15px;
@@ -522,7 +660,7 @@ input[type=number]::-webkit-outter-spin-button {
   width: 100%;
   text-align: center;
   padding-top: 6rem;
-  font-size: 4.6rem;
+  font-size: 3rem;
   color: #3b4140;
   font-weight: 500;
 }
@@ -603,16 +741,16 @@ input[type=number]::-webkit-outter-spin-button {
   background: #dfa240;
   right: 2rem;
   bottom: 2rem;
+  font-size: 1.4rem;
   cursor: pointer;
   -webkit-transition: 0.3s;
   -webkit-transform-style: preserve-3d;
 }
 .mainContainer .eventPage .eventContainer .confirmationContainer {
   position: absolute;
-  height: 50rem;
-  width: 70rem;
-  background: white;
-  padding: 7rem;
+  height: 55rem;
+  width: 65rem;
+  background: #f7f5f6;
   box-shadow: -1px 4px 21px -5px rgba(0, 0, 0, 0.17);
   box-sizing: border-box;
   z-index: 1200;
@@ -622,10 +760,55 @@ input[type=number]::-webkit-outter-spin-button {
   display: none;
   transform: translate(-50%);
 }
-.mainContainer .eventPage .eventContainer .confirmationContainer .detailContainer .placeholder {
+.mainContainer .eventPage .eventContainer .confirmationContainer .backEventImage {
   position: relative;
-  height: 5rem;
-  line-height: 5rem;
+  float: left;
+  height: 20rem;
+  width: 100%;
+  background-image: url("../images/4.jpg");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+.mainContainer .eventPage .eventContainer .confirmationContainer .backEventImage .eventShortDesctiption {
+  position: absolute;
+  bottom: 0;
+  height: 7rem;
+  line-height: 7rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  width: 100%;
+  font-size: 2rem;
+  font-weight: 100;
+  box-sizing: border-box;
+  color: white;
+  background: linear-gradient(to right, rgba(252, 247, 252, 0.84) 0, rgba(3, 3, 3, 0.84) 0, rgba(3, 3, 3, 0.9) 100%);
+}
+.mainContainer .eventPage .eventContainer .confirmationContainer .backEventImage .eventShortDesctiption .eventName {
+  position: relative;
+  float: left;
+  width: 70%;
+  height: 100%;
+}
+.mainContainer .eventPage .eventContainer .confirmationContainer .backEventImage .eventShortDesctiption .eventDate {
+  position: relative;
+  float: left;
+  width: 30%;
+  height: 100%;
+  text-align: right;
+}
+.mainContainer .eventPage .eventContainer .confirmationContainer .eventDetailConatiner .detailContainer {
+  position: relative;
+  float: left;
+  height: auto;
+  padding-left: 2rem;
+  box-sizing: border-box;
+  width: 63rem;
+}
+.mainContainer .eventPage .eventContainer .confirmationContainer .eventDetailConatiner .detailContainer .placeholder {
+  position: relative;
+  height: 3rem;
+  line-height: 3rem;
   width: 100%;
   box-sizing: border-box;
   border: none;
@@ -636,10 +819,54 @@ input[type=number]::-webkit-outter-spin-button {
   font-weight: 100;
   margin-top: 4rem;
 }
-.mainContainer .eventPage .eventContainer .confirmationContainer .detailContainer .placeholder::-webkit-input-placeholder {
+.mainContainer .eventPage .eventContainer .confirmationContainer .eventDetailConatiner .detailContainer .placeholder::-webkit-input-placeholder {
   color: #C3C3C3;
   font-size: 1.6rem;
   font-weight: 100;
+}
+.mainContainer .eventPage .eventContainer .confirmationContainer .eventDetailConatiner .selectPersonContainer {
+  position: relative;
+  float: left;
+  width: 63rem;
+  padding-top: 1rem;
+  padding-left: 2rem;
+  box-sizing: border-box;
+}
+.mainContainer .eventPage .eventContainer .confirmationContainer .eventDetailConatiner .selectPersonContainer .text {
+  position: relative;
+  width: 100%;
+  height: 5rem;
+  line-height: 5rem;
+  font-size: 1.6rem;
+  color: #645c5c;
+}
+.mainContainer .eventPage .eventContainer .confirmationContainer .eventDetailConatiner .selectPersonContainer .personBarContainer {
+  position: relative;
+  float: left;
+  height: 8rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+.mainContainer .eventPage .eventContainer .confirmationContainer .eventDetailConatiner .selectPersonContainer .personBarContainer .numberBlock {
+  position: relative;
+  float: left;
+  height: 5rem;
+  line-height: 5rem;
+  background: #E6E6E6;
+  width: 25%;
+  font-size: 2rem;
+  text-align: center;
+  color: #645c5c;
+  box-shadow: 0.2rem 0.2rem 0.15rem 0 rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  -webkit-transition: all 0.3s ease;
+}
+.mainContainer .eventPage .eventContainer .confirmationContainer .eventDetailConatiner .selectPersonContainer .personBarContainer .numberBlock.selectedNumber {
+  background: #dfa240;
+  color: white;
+  height: 5rem;
+  line-height: 5rem;
+  box-shadow: 0.1rem 0.15rem 1rem 0 rgba(0, 0, 0, 0.3);
 }
 .mainContainer .eventPage .eventContainer .confirmationContainer .btnConfirm {
   position: absolute;
@@ -651,24 +878,25 @@ input[type=number]::-webkit-outter-spin-button {
   background: #dfa240;
   color: white;
   text-align: center;
-  right: 7rem;
-  bottom: 7rem;
+  right: 2rem;
+  bottom: 2rem;
   cursor: pointer;
 }
 .mainContainer .eventPage .eventContainer .confirmationContainer .target {
   position: relative;
   float: left;
   padding-top: 2rem;
+  padding-left: 2rem;
   color: red;
   font-size: 1.5rem;
 }
 .mainContainer .eventPage .eventContainer .confirmationContainer .thankYouContainer {
   position: absolute;
-  height: 45rem;
+  height: 55rem;
   top: 0;
-  width: 60rem;
+  width: 65rem;
   background: white;
-  padding-top: 6rem;
+  padding-top: 13rem;
   box-sizing: border-box;
   opacity: 0;
   visibility: hidden;
@@ -946,7 +1174,7 @@ input[type=number]::-webkit-outter-spin-button {
   width: 100%;
   text-align: center;
   padding-top: 6rem;
-  font-size: 4.6rem;
+  font-size: 3rem;
   color: #3b4140;
   font-weight: 500;
 }
@@ -962,21 +1190,50 @@ input[type=number]::-webkit-outter-spin-button {
   width: 100%;
   padding: 3rem 0;
 }
-.mainContainer .galleryPage .galleryContainer .imageContainer .block {
-  position: relative;
-  height: 100%;
-  width: 100%;
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
-  box-shadow: -1px 4px 21px -5px rgba(0, 0, 0, 0.17);
-}
-.mainContainer .galleryPage .galleryContainer .overlay {
+.mainContainer .galleryPage .galleryContainer .imageContainer .overlay {
   position: relative;
   float: left;
   padding-left: 0;
   height: 30rem;
   margin-top: 1.5rem;
+}
+.mainContainer .galleryPage .galleryContainer .imageContainer .overlay .block {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  border-radius: 4px;
+  box-sizing: border-box;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  box-shadow: -1px 4px 21px -5px rgba(0, 0, 0, 0.17);
+}
+.mainContainer .galleryPage .galleryContainer .imageContainer .overlay .lastblock {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  border: 1px solid #dfa240;
+  cursor: pointer;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+.mainContainer .galleryPage .galleryContainer .imageContainer .overlay .lastblock .cameraBlock {
+  position: absolute;
+  height: 15rem;
+  width: 25rem;
+  text-align: center;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+.mainContainer .galleryPage .galleryContainer .imageContainer .overlay .lastblock .cameraBlock .cameraIcon {
+  position: relative;
+  height: 10rem;
+}
+.mainContainer .galleryPage .galleryContainer .imageContainer .overlay .lastblock .cameraBlock .cameraText {
+  color: #dfa240;
+  font-size: 2rem;
+  font-weight: 500;
 }
 .mainContainer .dividerMap {
   background: transparent url("../images/scallops-r.png") repeat-x scroll center center;
@@ -995,32 +1252,227 @@ input[type=number]::-webkit-outter-spin-button {
   background: black;
 }
 .mainContainer .footerEnd {
-  height: auto;
-  line-height: 8rem;
+  position: fixed;
+  bottom: 0;
+  height: 7rem;
+  line-height: 7rem;
   width: 100%;
+  z-index: 1300;
+  background: rgba(0, 0, 0, 0.96);
+}
+.mainContainer .footerEnd .leftPart {
   position: relative;
   float: left;
-  background-color: #000;
+  width: 55rem;
+  height: 100%;
 }
-.mainContainer .footerEnd .leftContent {
+.mainContainer .footerEnd .leftPart .logoBlock {
+  position: relative;
+  float: left;
+  width: 20rem;
+  text-align: center;
+  height: 4rem;
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+  box-sizing: border-box;
+  border-right: 1px solid rgba(255, 255, 255, 0.5);
+}
+.mainContainer .footerEnd .leftPart .logoBlock .realboxLogo {
+  position: absolute;
+  height: 3rem;
+  top: 50%;
+  right: 3rem;
+  transform: translateY(-50%);
+}
+.mainContainer .footerEnd .leftPart .footerText {
+  position: relative;
+  float: left;
+  color: white;
+  padding-left: 3rem;
+}
+.mainContainer .footerEnd .rightPart {
+  position: relative;
+  float: right;
+  height: 100%;
+  width: 30rem;
+  background: blue;
+  cursor: pointer;
+}
+.mainContainer .footerEnd .rightPart .btnClaim {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  text-align: center;
+  text-transform: uppercase;
+  color: white;
+  font-weight: 500;
+  background: #dfa240;
+}
+.mainContainer .signUpContainer {
+  position: absolute;
+  height: 52rem;
+  width: 45rem;
+  padding: 2rem;
+  box-sizing: border-box;
+  background: #dfa240;
+  border-radius: 4px;
+  top: 20rem;
+  left: 50%;
+  display: none;
+  z-index: 1300;
+  -webkit-transform: translate(-50%);
+}
+.mainContainer .signUpContainer .crossIcon {
+  position: absolute;
+  height: 2rem;
+  right: 1rem;
+  top: 1rem;
+  cursor: pointer;
+}
+.mainContainer .signUpContainer .header {
+  position: relative;
+  float: left;
+  padding-top: 2rem;
+  height: 6rem;
+  line-height: 6rem;
+  width: 100%;
+  font-size: 2.2rem;
+  color: white;
+  font-weight: 500;
+}
+.mainContainer .signUpContainer .signUpFormHeader {
+  position: relative;
+  float: left;
+  height: 6rem;
+  line-height: 6rem;
+  margin-top: 2rem;
+  width: 100%;
+  color: white;
+  font-weight: 500;
+  font-size: 1.5rem;
+}
+.mainContainer .signUpContainer .signUpFormHeader .formName {
+  position: relative;
+  float: left;
+  width: 9rem;
   text-align: left;
-  color: #B3AEAE;
-  font-size: 1.6rem;
-  padding-left: 0;
+  text-transform: uppercase;
 }
-.mainContainer .footerEnd .rightContent {
-  text-align: right;
-  color: #B3AEAE;
-  font-size: 1.6rem;
-  padding-right: 0;
+.mainContainer .signUpContainer .entryBlock {
+  position: relative;
+  float: left;
+  width: 100%;
+  height: 27rem;
+  background: white;
+  border-radius: 4px;
+  padding: 0 2rem;
+  box-sizing: border-box;
 }
-@media screen and (max-width: 420px) {
-  .mainContainer .footerEnd .leftContent {
-    font-size: 1.2rem;
-    text-align: center;
-  }
-  .mainContainer .footerEnd .rightContent {
-    font-size: 1.2rem;
-    text-align: center;
-  }
+.mainContainer .signUpContainer .entryBlock .entryPlaceholder {
+  position: relative;
+  height: 3rem;
+  line-height: 3rem;
+  width: 100%;
+  box-sizing: border-box;
+  border: none;
+  font-size: 1.6rem;
+  border-bottom: 0.1rem solid #e4e4e4;
+  color: gray;
+  background: transparent;
+  font-weight: 100;
+  margin-top: 4rem;
+}
+.mainContainer .signUpContainer .entryBlock .enteryPlaceholder::-webkit-input-placeholder {
+  color: #C3C3C3;
+  font-size: 1.6rem;
+  font-weight: 100;
+}
+.mainContainer .signUpContainer .btnSignUp {
+  position: absolute;
+  bottom: 2rem;
+  right: 2rem;
+  height: 4rem;
+  line-height: 4rem;
+  width: 12rem;
+  text-align: center;
+  color: white;
+  border: 1px solid white;
+}
+.viewer {
+  position: absolute;
+  clear: both;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  margin: 10px auto;
+  padding: 0;
+  background-color: #990000;
+  overflow: hidden;
+  height: 55rem;
+  width: auto;
+  color: #fff;
+  font-size: .9em;
+}
+.viewer img {
+  border: 5px solid #990000;
+}
+.viewer-image {
+  clear: both;
+  padding: 0;
+  margin: 0;
+  position: relative;
+  display: block;
+  height: 0rem;
+  width: auto;
+}
+.imageViewer {
+  position: relative;
+  float: left;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  height: 100%;
+  z-index: 1000;
+  display: none;
+}
+.imageViewer .image {
+  height: 0rem;
+}
+.imageViewer .activeImg {
+  height: auto;
+}
+.imageViewer .activeImage {
+  height: 55rem;
+}
+.imageViewer .preBtn {
+  position: absolute;
+  left: 2rem;
+  width: 5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 5rem;
+  background-image: url('../images/leftArrow.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  cursor: pointer;
+}
+.imageViewer .nextBtn {
+  position: absolute;
+  right: 2rem;
+  width: 5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 5rem;
+  background-image: url('../images/rightScroll.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  cursor: pointer;
+}
+.imageViewer .crossIcon {
+  position: absolute;
+  height: 4rem;
+  right: 1rem;
+  top: 1rem;
+  cursor: pointer;
 }
