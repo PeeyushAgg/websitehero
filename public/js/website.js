@@ -6,8 +6,10 @@ $(document).ready(function() {
     restaurant.getData({}, 'POST', pathname, function(a) {
         $('.loaderContainer').css('visibility', 'collapse')
         $('.mainContainer').css('overflow', 'visible')
-        console.log(a);
-        if (a.data.fb && a.data.zomato) {
+        console.log(a)
+        if(a.data.fb && a.data.zomato && a.data.foursquare){
+          renderFbZomatoFourSquare(a.data)
+        }else if (a.data.fb && a.data.zomato) {
             renderFbZomatoData(a.data)
         } else if (a.data.zomato) {
             renderZomatoData(a.data)
@@ -37,12 +39,14 @@ $(document).ready(function() {
             }, 500)
         })
     })
-    $(document).on("scroll", onScroll);
     loadTwitterApi()
-    scrollByMenu()
 });
 
 function renderFbZomatoData(r) {
+  render(".storyPage", "storyPage", {tag:quotes[Math.floor((Math.random() * 5))].tag})
+  render(".welcomePageContainer", "welcomePage", {
+    image: r.fb.cover.source
+  })
     render(".restaurantName", "restaurantName", {
         name: r.fb.name
     });
@@ -93,6 +97,20 @@ function renderFbZomatoData(r) {
         })
     }
     console.log(r);
+    render(".paralexPageOneContainer", "paralexPage", {
+      image: r.fb.photos.data[0].images[0].source
+    })
+    render(".paralexPageTwoContainer", "paralexPage", {
+      image: r.fb.photos.data[1].images[0].source
+    })
+    render(".paralexPageThreeContainer", "paralexPageThree", {
+      image: r.fb.photos.data[3].images[0].source
+    })
+    render(".reservationImageSectionContainer", "reservationImageSection", {
+      image: r.fb.photos.data[4].images[0].source,
+      quote: quotes[Math.floor((Math.random() * 5))].text,
+      name: r.fb.name
+    })
     render(".imageContainer", "image", r.fb.photos.data);
     renderReviews(r.zomato.reviews)
     r.zomato.address = ''
@@ -116,7 +134,9 @@ function renderFbZomatoData(r) {
             street: r.zomato.street
         })
         var mapUrl = ''
-        if( r.zomato.restaurant.location.latitude<1&&r.fb.location&&r.fb.location.latitude){
+        if(r.fb.address&&r.zomato.street){
+          mapUrl = "https://www.google.com/maps/embed/v1/place?q=" + r.zomato.street + r.fb.address+ "&key=AIzaSyDJWPGhfAQJGwGC3OOELU4kgdABZGs3AeU";
+        }else if( r.zomato.restaurant.location.latitude<1&&r.fb.location&&r.fb.location.latitude){
           mapUrl = "https://maps.google.com/maps?q=" + r.fb.location.latitude + "," + r.fb.location.longitude + "&hl=es;z=14&amp;output=embed";
         }else{
         mapUrl = "https://maps.google.com/maps?q=" + r.zomato.restaurant.location.latitude + "," + r.zomato.restaurant.location.longitude + "&hl=es;z=14&amp;output=embed";
@@ -229,7 +249,119 @@ function renderFbData(r) {
             phone: r.fb.phone
         })
 }
-
+function renderFbZomatoFourSquare(r){
+  render(".storyPage", "storyPage", quotes[Math.floor((Math.random() * 5))])
+  render(".welcomePageContainer", "welcomePage", {
+    image: r.fb.cover.source
+  })
+    render(".restaurantName", "restaurantName", {
+        name: r.fb.name
+    });
+    render(".headingName", "restaurantName", {
+        name: r.fb.name
+    });
+    if (r.fb.description)
+        render(".aboutDescription", "restaurantName", {
+            name: r.fb.description
+        });
+    else
+        render(".aboutDescription", "restaurantName", {
+            name: r.fb.about
+        });
+    if ($('.aboutDescription').height() < 88) {
+        $('.readMore').css('visibility', 'hidden')
+    }
+  r.fb.photos = {
+      data: []
+  }
+  if(r.foursquare.photos){
+    for(var u of  r.foursquare.photos.groups[0].items){
+      console.log("----------");
+      console.log(r);
+    r.fb.photos.data.push({images:[{source:u.prefix+'800x800'+u.suffix}]})
+  }
+  }
+  var r_length = r.fb.photos.data.length
+  if ((r.fb.albums.data[0] && r.fb.albums.data[1] && r.fb.albums.data[0].photos.data.length + r.fb.albums.data[1].photos.data.length > 9) || (r.fb.albums.data[0] && r.fb.albums.data[0].photos.data.length > 9)) {
+      var j = 0
+      var k = 0
+      for (var i = 0; i < 9-r_length; i++) {
+          if (r.fb.albums.data[0] && r.fb.albums.data[0].photos.data.length > j) {
+              r.fb.photos.data.push(r.fb.albums.data[0].photos.data[j])
+              j++
+          } else if (r.fb.albums.data[1] && r.fb.albums.data[1].photos.data.length > k) {
+              r.fb.photos.data.push(r.fb.albums.data[1].photos.data[j])
+              k++
+          }
+      }
+  } else {
+      r.fb.photos.data.push({
+          images: [{
+              source: r.zomato.restaurant.featured_image
+          }]
+      })
+      r.fb.photos.data.push({
+          images: [{
+              source: r.zomato.restaurant.thumb
+          }]
+      })
+  }
+  console.log(r);
+  render(".paralexPageOneContainer", "paralexPage", {
+    image: r.fb.photos.data[0].images[0].source
+  })
+  render(".paralexPageTwoContainer", "paralexPage", {
+    image: r.fb.photos.data[1].images[0].source
+  })
+  render(".paralexPageThreeContainer", "paralexPageThree", {
+    image: r.fb.photos.data[3].images[0].source
+  })
+  render(".reservationImageSectionContainer", "reservationImageSection", {
+    image: r.fb.photos.data[4].images[0].source,
+    quote: quotes[Math.floor((Math.random() * 5))].text,
+    name: r.fb.name
+  })
+  render(".imageContainer", "image", r.fb.photos.data);
+  renderReviews(r.zomato.reviews)
+  r.zomato.address = ''
+  r.zomato.street = ''
+  r.fb.address = ''
+  if (r.zomato.restaurant.location) {
+      if (r.zomato.restaurant.location.address) {
+          r.zomato.street += r.zomato.restaurant.location.address
+      }
+      if (r.fb.location && r.fb.location.country) {
+          r.fb.address += r.fb.location.country
+      }
+      if (r.fb.location && r.fb.location.zip) {
+          if (r.fb.address != '')
+              r.fb.address += ','
+          r.fb.address += r.fb.location.zip
+      }
+      console.log(r.fb);
+      render(".addressBlock", "address", {
+          address: r.fb.address,
+          street: r.zomato.street
+      })
+      var mapUrl = ''
+      if(r.fb.address&&r.zomato.street){
+        mapUrl = "https://www.google.com/maps/embed/v1/place?q=" + r.zomato.street + r.fb.address+ "&key=AIzaSyDJWPGhfAQJGwGC3OOELU4kgdABZGs3AeU";
+      }else if( r.zomato.restaurant.location.latitude<1&&r.fb.location&&r.fb.location.latitude){
+        mapUrl = "https://maps.google.com/maps?q=" + r.fb.location.latitude + "," + r.fb.location.longitude + "&hl=es;z=14&amp;output=embed";
+      }else{
+      mapUrl = "https://maps.google.com/maps?q=" + r.zomato.restaurant.location.latitude + "," + r.zomato.restaurant.location.longitude + "&hl=es;z=14&amp;output=embed";
+    }
+    render(".mapPage", "map", {
+          src: mapUrl
+      })
+  }
+  if (r.fb.phone)
+      render(".contactBlock", "contact", {
+          phone: r.fb.phone
+      })
+  if (r.fb.events)
+      renderEvents(r.fb.events.data)
+}
 function renderReviews(data) {
     if (data.user_reviews) {
         var i = 0;
@@ -369,46 +501,4 @@ function loadTwitterApi() {
             fjs.parentNode.insertBefore(js, fjs);
         }
     }(document, 'script', 'twitter-wjs');
-}
-
-
-function onScroll(event) {
-    var scrollPos = $(document).scrollTop();
-    $('.option').each(function() {
-        var currLink = $(this);
-        var refElement = $(currLink.attr("data-link"));
-        console.log(refElement.position().top)
-        if (refElement.position().top <= scrollPos && refElement.position().top + refElement.height() > scrollPos) {
-            $('.option').removeClass("activeNav");
-            currLink.addClass("activeNav");
-        } else {
-            currLink.removeClass("activeNav");
-        }
-    });
-}
-
-function scrollByMenu() {
-    $('.option').on('click', function(e) {
-        e.preventDefault();
-        $(document).off("scroll");
-        $('.navTabContainer').removeClass('showNavOption');
-        if ($('.navbarHeader').width() > 500) {
-            $('.option').each(function() {
-                $(this).removeClass('activeNav');
-            })
-            $(this).addClass('activeNav');
-        }
-
-
-        var target = $(this).attr('data-link'),
-
-            menu = target;
-        $target = $(target);
-        $('html, body').stop().animate({
-            'scrollTop': $target.offset().top + 2
-        }, 500, 'swing', function() {
-            window.location.hash = target;
-            $(document).on("scroll", onScroll);
-        });
-    });
 }

@@ -11,30 +11,23 @@ var numberBlock = {
     "seat": "4+"
   }]
 }
-var data={
-  restaurantName : [
-    {logoName: 'ROSE WATER'}
-  ],
-
-  gallery : [
-    {image: "../images/blog1.jpg"},
-    {image: "../images/blog2.jpg"},
-    {image: "../images/blog3.jpg"},
-    {image: "../images/gallery-02.jpg"},
-    {image: "../images/gallery-04.jpg"},
-    {image: "../images/gallery-07.jpg"},
-    {image: "../images/gallery-08.jpg"},
-    {image: "../images/gallery-09.jpg"},
-    {image: "../images/gallery-10.jpg"},
-  ],
-
-  events : [
-    {eventImage: "../images/event1.jpg", eventName: "beer cup 2016", eventDate:"June 15, 2016"},
-    {eventImage: "../images/event2.jpg", eventName: "growler festival", eventDate:"June 17, 2016"},
-    {eventImage: "../images/event3.jpg", eventName: "20th of june party", eventDate:"June 20, 2016"},
-    {eventImage: "../images/event4.jpg", eventName: "football cup 2016", eventDate:"June 25, 2016"},
-    {eventImage: "../images/event5.jpg", eventName: "growler concert", eventDate:"August 15, 2016"},
-    {eventImage: "../images/event6.jpg", eventName: "beer cup 2016", eventDate:"August 23, 2016"}
-  ]
-
-}
+var quotes = [ {
+  text : 'Food tastes better when you eat it with your family.',
+  tag : 'GOOD FRIENDS GOOD FOOD GOOD TIMES'
+},
+{
+  text : 'Laughter is brightest where food is best.',
+  tag : 'RELAX INDULGE EAT SMILE'
+},
+{
+  text : 'One cannot think well, love well, sleep well, if one has not dined well.',
+  tag : 'BON APPETIT'
+},
+{
+  text : 'A place where you can still enjoy many of the old family recipes.',
+  tag : 'RELAX INDULGE EAT SMILE'
+},
+{
+  text : 'It takes an army talented & creative people to execute a successful restaurent.',
+  tab : 'EAT WELL BE KIND'
+}]

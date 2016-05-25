@@ -13,97 +13,22 @@
   <link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
   <link href='https://fonts.googleapis.com/css?family=Dancing+Script:400,700' rel='stylesheet' type='text/css'>
   <link href='https://fonts.googleapis.com/css?family=Pinyon+Script|Raleway:400,200,300,500,700,800,900' rel='stylesheet' type='text/css'>
-
   <link rel="stylesheet" type="text/css" href="../css/website.css">
   <link rel="stylesheet" type="text/css" href="../css/websiteScreen.css">
 </head>
-
 <body>
   <div class="carousalOverlay">
   </div>
   <div class="mainContainer" >
     <div id='fb-root'></div>
    <div class="loaderContainer"><img src="../images/loadGear.svg" class="loader"/></div>
-    <div class="welcomePage">
-      <div class="navbarBlock col-sm-12">
-        <div class="container">
-        <div class="col-sm-4 option restaurantNameBlock">
-          <div class="restaurantName">
-          </div>
-        </div>
-        <div class="col-sm-1 option" data-link=".locationSection">
-          Contact
-        </div>
-        <div class="col-sm-1 option" data-link=".reservationPage">
-          Reservation
-        </div>
-        <div class="col-sm-1 option" data-link=".eventPage">
-          Events
-        </div>
-        <div class="col-sm-1 option" data-link=".galleryPage">
-          Gallery
-        </div>
-        <div class="col-sm-1 option" data-link=".aboutPage">
-          About Us
-        </div>
-        <div class="col-sm-offset-1 col-sm-1 option" data-link=".welcomePage">
-          Home
-        </div>
-      </div>  
-      </div>
-      <div class="centerTextBlock">
-        <div class="heading">
-          Discover
-        </div>
-        <div class="headingName">
-        </div>
-        <div class="spoonLogoBlock">
-          <div class="headingLine">
-            <div class="leftLine">
-            </div>
-            <div class="star">
-              *
-            </div>
-            <div class="rightLine">
-            </div>
-          </div>
-        </div>
-        <div class="openingText">
-          OPENING HOUR
-        </div>
-        <div class="normalDays day">
-          Monday - Friday: <span class="time">08:00 AM - 11:00 PM </span>
-        </div>
-        <div class="weekends day">
-          Weekends: <span class="time">08:00 AM - 02:00 PM</span>
-        </div>
-      </div>
-      <div class="col-xs-offset-2 col-md-offset-5 col-md-4 socialIconBlock">
-        <div class="feedBlock facebookBtn" >
-          <img src="../images/facebook.png" class="socialLogo">
-        </div>
-        <div class="feedBlock">
-          <a href = "https://twitter.com/share" data - hashtags = "MyNewWebsite">
-          <img src="../images/twitter.png" class="socialLogo twitter-share-button">
-        </a>
-        </div>
-        <div class="feedBlock">
-          <img src="../images/instagram.png" class="socialLogo">
-        </div>
-      </div>
-
+    <div class="welcomePageContainer">
     </div>
     <div class="storyPage">
-      <div class="container">
-        <div class="storyHeading">
-          EAT WELL. BE KIND
-        </div>
-        <div class="storyDescription">
-          At Rosewater we’re passionate about sourcing and serving the best food products possible - from fresh baked goods & prepared foods made in house to specialty products from the island and beyond.
-        </div>
-      </div>
+
     </div>
-    <div class="paralexPageOne">
+    <div class="paralexPageOneContainer">
+
     </div>
     <div class="aboutPage">
       <div class="container">
@@ -115,8 +40,9 @@
         <div class="readMore">read more</div>
       </div>
     </div>
-    <div class="paralexPageTwo">
-    </div>
+    <div class="paralexPageTwoContainer">
+
+     </div>
     <div class="galleryPage">
       <div class="container">
         <div class="galleryHeading">
@@ -128,47 +54,13 @@
         </div>
       </div>
     </div>
-    <div class="paralexPageThree">
-      <div class="paralexOverlay">
-        <div class="paralexHeading">
-          Find Out
-          <br/>
-          <span class="subHeading">WHAT PEOPLE SAY</span>
-        </div>
-        <div class="carousalContainer">
-
-        </div>
-        <div class="reviewContainer">
-          <div class="reviewHeading">
-            WHAT PEOPLE SAY
-            <img src="../images/cross.png" class="crossIcon">
-          </div>
-          <div class="reviewContainerBlock">
-
-          </div>
-        </div>
-      </div>
+    <div class="paralexPageThreeContainer">
     </div>
     <div class="eventPage">
 
     </div>
     <div class="reservationPage">
-      <div class="reservationImageSection">
-        <div class="reservationOverlay">
-          <div class="container">
-            <div class="contentBlock col-sm-7">
-              <div class="greeting">
-                Welcome to Rose Water!
-              </div>
-              <div class="greetingDescription">
-                WE ARE EXCITED <span class="lightText">TO COOK FOR</span> YOU <span class="lightText">TODAY</span>!
-              </div>
-              <div class="quoteText">
-                SPICES FROM ALL OVER THE WORLD SELECTED JUST FOR YOU.
-              </div>
-            </div>
-          </div>
-        </div>
+      <div class="reservationImageSectionContainer">
       </div>
       <div class="divider">
       </div>
@@ -246,11 +138,132 @@
           {{html name}}
       </div>
       </script>
+      <script id="welcomePageTemplate" type="text/x-jquery-tmpl">
+      <div class="welcomePage" style='background : url("{{html image}}") 50% 0 fixed; background-repeat: no-repeat; background-size: cover;'>
+        <div class="navbarBlock col-sm-12">
+          <div class="container">
+          <div class="col-sm-4 option restaurantNameBlock">
+            <div class="restaurantName">
+            </div>
+          </div>
+          <div class="col-sm-1 option" data-link=".locationSection">
+            Contact
+          </div>
+          <div class="col-sm-1 option" data-link=".reservationPage">
+            Reservation
+          </div>
+          <div class="col-sm-1 option" data-link=".eventPage">
+            Events
+          </div>
+          <div class="col-sm-1 option" data-link=".galleryPage">
+            Gallery
+          </div>
+          <div class="col-sm-1 option" data-link=".aboutPage">
+            About Us
+          </div>
+          <div class="col-sm-offset-1 col-sm-1 option" data-link=".welcomePage">
+            Home
+          </div>
+        </div>
+        </div>
+        <div class="centerTextBlock">
+          <div class="heading">
+            Discover
+          </div>
+          <div class="headingName">
+          </div>
+          <div class="spoonLogoBlock">
+            <div class="headingLine">
+              <div class="leftLine">
+              </div>
+              <div class="star">
+                *
+              </div>
+              <div class="rightLine">
+              </div>
+            </div>
+          </div>
+          <div class="openingText">
+            OPENING HOUR
+          </div>
+          <div class="normalDays day">
+            Monday - Friday: <span class="time">08:00 AM - 11:00 PM </span>
+          </div>
+          <div class="weekends day">
+            Weekends: <span class="time">08:00 AM - 02:00 PM</span>
+          </div>
+        </div>
+        <div class="col-xs-offset-2 col-md-offset-5 col-md-4 socialIconBlock">
+          <div class="feedBlock facebookBtn" >
+            <img src="../images/facebook.png" class="socialLogo">
+          </div>
+          <div class="feedBlock">
+            <a href = "https://twitter.com/share" data - hashtags = "MyNewWebsite">
+            <img src="../images/twitter.png" class="socialLogo twitter-share-button">
+          </a>
+          </div>
+          <div class="feedBlock">
+            <img src="../images/instagram.png" class="socialLogo">
+          </div>
+        </div>
 
+      </div>
+    </script>
+      <script id="paralexPageThreeTemplate" type="text/x-jquery-tmpl">
+      <div class="paralexPageThree" style='background : url("{{html image}}") 50% 0 fixed; background-repeat: no-repeat; background-size: cover;'>
+        <div class="paralexOverlay">
+          <div class="paralexHeading">
+            Find Out
+            <br/>
+            <span class="subHeading">WHAT PEOPLE SAY</span>
+          </div>
+          <div class="carousalContainer">
 
+          </div>
+          <div class="reviewContainer">
+            <div class="reviewHeading">
+              WHAT PEOPLE SAY
+              <img src="../images/cross.png" class="crossIcon">
+            </div>
+            <div class="reviewContainerBlock">
+
+            </div>
+          </div>
+        </div>
+      </div>
+      </script>
+      <script id="reservationImageSectionTemplate" type="text/x-jquery-tmpl">
+      <div class="reservationImageSection" style='background : url("{{html image}}") 50% 0 fixed; background-repeat: no-repeat; background-size: cover;'>
+        <div class="reservationOverlay">
+          <div class="container">
+            <div class="contentBlock col-sm-7">
+              <div class="greeting">
+                Welcome to {{html name}}!
+              </div>
+              <div class="greetingDescription">
+                WE ARE EXCITED <span class="lightText">TO COOK FOR</span> YOU <span class="lightText">TODAY</span>!
+              </div>
+              <div class="quoteText">
+                {{html quote}}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      </script>
+      <script id="storyPageTemplate" type="text/x-jquery-tmpl">
+      <div class="container">
+        <div class="storyHeading">
+          {{html tag}}
+        </div>
+        <div class="storyDescription">
+
+        </div>
+      </div>
+      </script>
       <script id="imageTemplate" type="text/x-jquery-tmpl">
         <div class="col-sm-4 col-xs-12 overlay">
-          <div class="block" style="background-image: url('{{html images[3].source}}')">
+          <div class="block" style="background-image: url('{{html images[3]?images[3].source:images[0].source}}')">
           </div>
         </div>
       </script>
@@ -370,7 +383,7 @@
         </div>
         </div>
       </script>
-      <script id='allReviews' type="text/x-jquery-tmpl">
+      <script id='allReviewsTemplate' type="text/x-jquery-tmpl">
       <div class="reviewBlock">
         <div class="leftPanel">
           <div class="memberBlock">
@@ -383,7 +396,10 @@
         </div>
       </div>
       </script>
-
+      <script id='paralexPageTemplate' type="text/x-jquery-tmpl">
+      <div class="paralexPageOne" style='background : url("{{html image}}") 50% 0 fixed; background-repeat: no-repeat; background-size: cover;'>
+      </div>
+      </script>
       <script src="../scripts/jquery.js"></script>
       <script src="../scripts/transit.js"></script>
       <script src="../scripts/bootstrap.min.js"></script>

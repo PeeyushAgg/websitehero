@@ -148,7 +148,7 @@ app.post('/getFacebookList', function(req, res) {
 });
 function fetchFacebookData(name,callback){
   var options = {
-      url: 'https://graph.facebook.com/search?q='+name+'&type=page&fields=id,name,likes,category,picture,location&access_token='+accessToken
+      url: 'https://graph.facebook.com/search?q='+name+'&type=page&fields=id,name,likes,category,location&access_token='+accessToken
   };
   request(options, function(req, res, error) {
     if(res){
@@ -231,53 +231,31 @@ function convertToId(value){
   return id;
 }
 function getFbPageDetails(id,callback){
-  MongoClient.connect('mongodb://127.0.0.1:27017/websiteHero', function(err, db) {
-    var collection = db.collection('facebookPages');
-    collection.find({_id:id}).toArray(function(err, item) {
-      if(item&&item.length==0){
     var options = {
-        url: 'https://graph.facebook.com/'+id+'/?fields=name,id,likes,about,phone,hours,description,albums.limit(2){photos.limit(9).height(300){images}},restaurant_services,cover,picture,events.limit(6){cover,name,start_time,place},posts.limit(6){message,full_picture,description},location&access_token='+accessToken
+        url: 'https://graph.facebook.com/'+id+'/?fields=name,id,likes,about,phone,hours,description,albums.limit(2){photos.limit(25).height(300){images}},restaurant_services,cover.height(800),picture,events.limit(6){cover,name,start_time,place},posts.limit(6){message,full_picture,description},location&access_token='+accessToken
     };
     request(options, function(req, res, error) {
       var r;
       if(res){
         r = JSON.parse(res.body);
-        r._id = id
-        collection.save(r)
       }else{
         r = {'error':error}
       }
       if(callback)
       callback(r);
     });
-  } else{
-    if(callback)
-    callback(item[0]);
-  }
-})
-})
+
 }
 function getZomatoPageDetails(id,callback){
-  MongoClient.connect('mongodb://127.0.0.1:27017/websiteHero', function(err, db) {
-    var collection = db.collection('zomatoPages');
-    collection.find({_id:id}).toArray(function(err, item) {
-      if(item&&item.length==0){
   getRestaurantDetails(id,'restaurant',function(r){
     var obj = {};
     obj.restaurant = r;
     getRestaurantDetails(id,'reviews',function(r){
       obj.reviews = r;
-      obj._id = id
-      collection.save(obj)
-      if(callback)
+        if(callback)
       callback(obj)
     })
   })
-} else{
-
-}
-})
-})
 }
 function getRestaurantDetails(id,detailType,callback){
   var url = host + '/' + detailType;
@@ -302,10 +280,6 @@ function getRestaurantDetails(id,detailType,callback){
   });
 }
 function getFourSquareVenueDetail(id,callback){
-  MongoClient.connect('mongodb://127.0.0.1:27017/websiteHero', function(err, db) {
-    var collection = db.collection('foursquarePages');
-    collection.find({_id:id}).toArray(function(err, item) {
-      if(item&&item.length==0){
       var today = new Date()
       var dd = today.getDate()
       var mm = today.getMonth() + 1 //January is 0!
@@ -340,7 +314,6 @@ function getFourSquareVenueDetail(id,callback){
             obj.photos = r.photos
             obj.reviews = r.tips
             obj.bestPhoto = r.bestPhoto
-            collection.save(obj)
           }else{
             obj = {'error':error}
           }
@@ -350,9 +323,6 @@ function getFourSquareVenueDetail(id,callback){
           if(callback)
           callback(obj)
       })
-}
-})
-})
 }
 app.listen(portNumber, function() {
     console.log('server listening at ' + portNumber);
