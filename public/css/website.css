@@ -24,8 +24,8 @@ select:focus,
 textarea:focus {
   outline: none;
 }
-input[type=date]::-webkit-inner-spin-button,
-input[type=date]::-webkit-outter-spin-button {
+input[type=data]::-webkit-inner-spin-button,
+input[type=data]::-webkit-outter-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
@@ -310,7 +310,7 @@ input[type=number]::-webkit-outter-spin-button {
   cursor: pointer;
   font-weight: 600;
   left: 50%;
-  z-index: 500;
+  z-index: 2;
   transform: translateX(-50%);
   border: 1px solid #dfa240;
 }
@@ -1342,11 +1342,16 @@ input[type=number]::-webkit-outter-spin-button {
 }
 .mainContainer .mapPage .mapAddress {
   position: absolute;
-  height: 6rem;
-  width: 23rem;
+  height: 7.3rem;
+  width: 19rem;
   background: white;
   top: 2rem;
+  -webkit-line-clamp: 3;
   left: 2rem;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  display: -webkit-box;
+  text-overflow: ellipsis;
   font-weight: 500;
   padding-left: 1rem;
 }
@@ -1357,7 +1362,7 @@ input[type=number]::-webkit-outter-spin-button {
   line-height: 6rem;
   width: 100%;
   z-index: 1300;
-  background: rgba(0, 0, 0, 0.96);
+  background: rgba(0, 0, 0, 0.98);
 }
 .mainContainer .footerEnd .leftPart {
   position: relative;
@@ -1507,6 +1512,8 @@ input[type=number]::-webkit-outter-spin-button {
   padding: 0;
   background-color: #990000;
   overflow: hidden;
+  max-width: 85rem;
+  max-height: 58rem;
   height: auto;
   width: auto;
   color: #fff;
@@ -1535,6 +1542,8 @@ input[type=number]::-webkit-outter-spin-button {
 }
 .imageViewer .image {
   height: 0;
+  max-height: 58rem;
+  max-width: 85rem;
 }
 .imageViewer .activeImg {
   height: auto;
