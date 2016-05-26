@@ -109,20 +109,39 @@
             <img src="../images/diamond.png" class="diamondLogo">
           </div>
           <div class="formGroup">
-            <div class="formHeading">Guest:</div>
-            <input class="formControl" type="number" placeholder="How Many Guests">
-          </div>
-          <div class="formGroup">
             <div class="formHeading">Email:</div>
             <input class="formControl" type="email" placeholder="Your Email Address">
           </div>
-          <div class="formGroup">
-            <div class="formHeading">Date:</div>
-            <input class="formControl" type="text" placeholder="When do you want to Book">
+          <div class="formGroup formDateGroup">
+            <div class="formHeading formDateHeading">Date:</div>
+            <input placeholder="Date" class="textbox-n" type="text" onfocus="(this.type='date')"  id="selectDate">
+          </div>
+          <div class="formGroup formDateGroup" style="margin-left: 6%;">
+            <div class="formHeading formDateHeading">Time:</div>
+            <input placeholder="Time" class="textbox-n" type="text" onfocus="(this.type='time')"  id="selectDate">
           </div>
           <div class="formGroup">
             <div class="formHeading">Your Preferences:</div>
             <input class="formControl" type="text" placeholder="How can we help you?">
+          </div>
+          <div class="formGroup">
+            <div class="formHeading">Guest:</div>
+            <div class="guestBlock">
+              <div class="personBarContainer">
+                <div class="personBlock">
+                  1
+                </div>
+                <div class="personBlock selectedPerson">
+                  2
+                </div>
+                <div class="personBlock">
+                  3
+                </div>
+                <div class="personBlock">
+                  4+
+                </div>
+              </div>
+            </div>
           </div>
           <div class="btnBooking">
             MAKE YOUR BOOKING
@@ -144,7 +163,7 @@
     <div class="dividerMap">
     </div>
     <div class="mapPage">
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3503.4504017372415!2d77.31048431508157!3d28.586261982436028!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390ce45f7ea20819%3A0xad1c6b40438f7d41!2sA-35%2C+A+Block%2C+Sector+2%2C+Noida%2C+Uttar+Pradesh+201301%2C+India!5e0!3m2!1sen!2sca!4v1460720608189"
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3503.4504017372415!2d77.31048431508157!3d28.586261982436028!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390ce45f7ea20819%3A0xad1c6b40438f7d41!2sA-35%2C+A+Block%2C+Sector+2%2C+Noida%2C+Uttar+Pradesh+201301%2C+India!5e0!3m2!1sen!2sca!4v1460720608189"
           width="100%" height="100%" allowfullscreen style="pointer-events: none;"></iframe>
     </div>
 
@@ -337,6 +356,9 @@
       </div>
       </script>
       <script id="mapTemplate" type="text/x-jquery-tmpl">
+      <div class="mapAddress">
+        {{html address}}
+      </div>
       <iframe src="{{html src}}" width="100%" height="100%" allowfullscreen style="pointer-events: none;"></iframe>
       </script>
       <script id="reviewTemplate" type="text/x-jquery-tmpl">

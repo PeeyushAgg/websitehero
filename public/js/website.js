@@ -31,11 +31,14 @@ $(document).ready(function() {
         $(this).css('width','4rem');
         $(this).find('.text').addClass('hide');
     })
+    bind('.personBlock', function showSelectedNumber() {
+      $('.personBlock').removeClass('selectedPerson');
+      $(this).addClass('selectedPerson');
+    });
     bind('.btnClaim', function(){
       $('.signUpContainer').css('display','block');
       $('.carousalOverlay').css('display', 'block');
       $('.mainContainer').css('overflow-y', 'hidden');
-      $(".signUpContainer").get(0).scrollIntoView();
       bind('.crossIcon', function(){
         $('.signUpContainer').css('display','none');
         $('.carousalOverlay').css('display', 'none');
@@ -55,18 +58,18 @@ $(document).ready(function() {
         $(".greetingPage").css("visibility", "visible")
         $(".greetingPage").hide()
         $(".greetingPage").fadeIn(500)
-        bind(".crossIcon", function() {
+        setTimeout(function() {
             $(".greetingPage").fadeOut(500)
             setTimeout(function() {
                 $(".greetingPage").css("visibility", "hidden")
             }, 500)
-        })
+        },2000)
     })
     loadTwitterApi()
 });
 
 function renderFbZomatoData(r) {
-  render(".storyPage", "storyPage", {tag:quotes[Math.floor((Math.random() * 5))].tag})
+  render(".storyPage", "storyPage", {tag:quotes[Math.floor((Math.random() * 5))].tag,name:r.fb.name})
   render(".welcomePageContainer", "welcomePage", {
     image: r.fb.cover.source
   })
@@ -97,11 +100,13 @@ function renderFbZomatoData(r) {
     }
     var count = 0
     for(var v of r.fb.albums.data){
+      if(v&&v.photos&&v.photos.data){
       for(var u of v.photos.data){
         u.count = count
         r.fb.photos.data.push(u)
         count++
       }
+    }
     }
     console.log(r);
     render(".paralexPageOneContainer", "paralexPage", {
@@ -179,47 +184,16 @@ function renderFbZomatoData(r) {
             address: r.fb.address,
             street: r.zomato.street
         })
-        var mapUrl
-      if( r.zomato.restaurant.location.latitude<1&&r.fb.location&&r.fb.location.latitude){
-          mapUrl = "https://maps.google.com/maps?q=" + r.fb.location.latitude + "," + r.fb.location.longitude + "&hl=es;z=14&amp;output=embed";
-        }else{
-        mapUrl = "https://maps.google.com/maps?q=" + r.zomato.restaurant.location.latitude + "," + r.zomato.restaurant.location.longitude + "&hl=es;z=14&amp;output=embed";
-      }
-      render(".mapPage", "map", {
-            src: mapUrl
-        })
-    }
-    renderReviews(r.zomato.reviews)
-    r.zomato.address = ''
-    r.zomato.street = ''
-    r.fb.address = ''
-    if (r.zomato.restaurant.location) {
-        if (r.zomato.restaurant.location.address) {
-            r.zomato.street += r.zomato.restaurant.location.address
-        }
-        if (r.fb.location && r.fb.location.country) {
-            r.fb.address += r.fb.location.country
-        }
-        if (r.fb.location && r.fb.location.zip) {
-            if (r.fb.address != '')
-                r.fb.address += ','
-            r.fb.address += r.fb.location.zip
-        }
-        console.log(r.fb);
-        render(".addressBlock", "address", {
-            address: r.fb.address,
-            street: r.zomato.street
-        })
         var mapUrl = ''
-        if(r.fb.address&&r.zomato.street){
-          mapUrl = "https://www.google.com/maps/embed/v1/place?q=" + r.zomato.street + r.fb.address+ "&key=AIzaSyDJWPGhfAQJGwGC3OOELU4kgdABZGs3AeU";
-        }else if( r.zomato.restaurant.location.latitude<1&&r.fb.location&&r.fb.location.latitude){
+         if(r.fb.location&&r.fb.location.latitude){
           mapUrl = "https://maps.google.com/maps?q=" + r.fb.location.latitude + "," + r.fb.location.longitude + "&hl=es;z=14&amp;output=embed";
         }else{
         mapUrl = "https://maps.google.com/maps?q=" + r.zomato.restaurant.location.latitude + "," + r.zomato.restaurant.location.longitude + "&hl=es;z=14&amp;output=embed";
       }
+      console.log(mapUrl);
       render(".mapPage", "map", {
-            src: mapUrl
+            src: mapUrl,
+            address: ((r.zomato.street==''&&r.fb.location.street)?(r.fb.location.street+','):'')+r.fb.address
         })
     }
     if (r.fb.phone)
@@ -228,6 +202,9 @@ function renderFbZomatoData(r) {
         })
     if (r.fb.events)
         renderEvents(r.fb.events.data)
+    $(document).on("scroll", onScroll)
+    loadTwitterApi()
+    scrollByMenu()
 }
 
 function renderZomatoData(r) {
@@ -327,7 +304,7 @@ function renderFbData(r) {
         })
 }
 function renderFbZomatoFourSquare(r){
-  render(".storyPage", "storyPage", quotes[Math.floor((Math.random() * 5))])
+  render(".storyPage", "storyPage", {tag:quotes[Math.floor((Math.random() * 5))].tag,name:r.fb.name})
   render(".welcomePageContainer", "welcomePage", {
     image: r.fb.cover.source
   })
@@ -359,11 +336,13 @@ function renderFbZomatoFourSquare(r){
   }
   }
   for(var v of r.fb.albums.data){
+    if(v&&v.photos&&v.photos.data){
     for(var u of v.photos.data){
       u.count = count
       r.fb.photos.data.push(u)
       count++
     }
+  }
   }
   console.log(r);
   render(".paralexPageOneContainer", "paralexPage", {
@@ -449,7 +428,8 @@ function renderFbZomatoFourSquare(r){
       mapUrl = "https://maps.google.com/maps?q=" + r.zomato.restaurant.location.latitude + "," + r.zomato.restaurant.location.longitude + "&hl=es;z=14&amp;output=embed";
     }
     render(".mapPage", "map", {
-          src: mapUrl
+          src: mapUrl,
+          address: ((r.zomato.street==''&&r.fb.location.street)?(r.fb.location.street+','):r.zomato.street)+r.fb.address
       })
   }
   if (r.fb.phone)
@@ -458,6 +438,9 @@ function renderFbZomatoFourSquare(r){
       })
   if (r.fb.events)
       renderEvents(r.fb.events.data)
+  $(document).on("scroll", onScroll)
+  loadTwitterApi()
+  scrollByMenu()
 }
 function renderReviews(data) {
     if (data.user_reviews) {
@@ -502,7 +485,7 @@ function renderEvents(events) {
         if (events[i].cover)
             events[i].image = events[i].cover.source
         events[i].address = ''
-        if (events[i].place.location) {
+        if (events[i].place&&events[i].place.location) {
             if (events[i].place.location.street) {
                 events[i].address += events[i].place.location.street
             }
@@ -621,4 +604,41 @@ function loadTwitterApi() {
             fjs.parentNode.insertBefore(js, fjs);
         }
     }(document, 'script', 'twitter-wjs');
+}
+function onScroll(event) {
+    var scrollPos = $(document).scrollTop();
+    $('.option').each(function() {
+        var currLink = $(this);
+        var refElement = $(currLink.attr("data-link"));
+        console.log(refElement.position().top)
+        if (refElement.position().top <= scrollPos && refElement.position().top + refElement.height() > scrollPos) {
+            $('.option').removeClass("activeNav");
+            currLink.addClass("activeNav");
+        } else {
+            currLink.removeClass("activeNav");
+        }
+    });
+}
+
+function scrollByMenu() {
+    $('.option').on('click', function(e) {
+        e.preventDefault();
+        $(document).off("scroll");
+        $('.navTabContainer').removeClass('showNavOption');
+        if ($('.navbarHeader').width() > 500) {
+            $('.option').each(function() {
+                $(this).removeClass('activeNav');
+            })
+            $(this).addClass('activeNav');
+        }
+        var target = $(this).attr('data-link'),
+            menu = target;
+        $target = $(target);
+        $('html, body').stop().animate({
+            'scrollTop': $target.offset().top + 2
+        }, 500, 'swing', function() {
+            window.location.hash = target;
+            $(document).on("scroll", onScroll);
+        });
+    });
 }
