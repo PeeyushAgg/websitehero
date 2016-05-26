@@ -58,9 +58,7 @@ app.post('/preview/:id',function(req, res){
         data.fb = r
         getZomatoPageDetails(r[1],function(r2){
         data.zomato = r2
-        console.log("+++++++++++++++++++++");
-        console.log(data);
-        res.json(data)
+          res.json(data)
       })
       })
     } else if(r[0]!='0'&&r[1]=='0'&&r[2]=='0'){
