@@ -1,5 +1,5 @@
 //out:website.css
-@boxShadow: -1px 4px 21px -5px rgba(0, 0, 0, 0.17);
+@boxShadow: -1px 4px 21px -5px rgba(0, 0, 0, 0.27);
 html {
   font-size: 10px;
 }
@@ -25,6 +25,11 @@ input:focus,
 select:focus,
 textarea:focus {
   outline: none;
+}
+input[type=date]::-webkit-inner-spin-button,
+input[type=date]::-webkit-outter-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
 input[type=number]::-webkit-inner-spin-button,
 input[type=number]::-webkit-outter-spin-button {
@@ -336,7 +341,7 @@ input[type=number]::-webkit-outter-spin-button {
         position: fixed;
         top: 50%;
         left: 50%;
-        height: 60rem;
+        height: 54rem;
         width: 70rem;
         visibility: hidden;
         background-color: white;
@@ -351,7 +356,7 @@ input[type=number]::-webkit-outter-spin-button {
           line-height: 9rem;
           width: 100%;
           font-weight: 700;
-          box-shadow: @boxShadow;
+          box-shadow: -1px 1px 15px -5px rgba(0, 0, 0, 0.27);;
           box-sizing: border-box;
           font-size: 2.4rem;
           text-align: center;
@@ -383,7 +388,7 @@ input[type=number]::-webkit-outter-spin-button {
             .leftPanel {
               position: relative;
               float: left;
-              height: 100%;
+              height: 12rem;
               width: 30%;
               .memberBlock {
                 position: absolute;
@@ -419,9 +424,14 @@ input[type=number]::-webkit-outter-spin-button {
               float: right;
               height: 100%;
               width: 70%;
+              font-size: 1.4rem;
+              text-align: justify;
               padding: 2rem;
               overflow: scroll;
               box-sizing: border-box;
+              margin-top: 2rem;
+              margin-bottom: 2rem;
+              border-left: 1px solid rgba(128,128,128,0.4);
             }
           }
         }
@@ -612,7 +622,7 @@ input[type=number]::-webkit-outter-spin-button {
                   border-radius: 50%;
                 }
                 .memberReview {
-                  font-size: 2rem;
+                  font-size: 1.6rem;
                   height: 18rem;
                   font-weight: 300;
                   padding: 1.5rem;
