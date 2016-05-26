@@ -13,6 +13,7 @@ $(document).ready(function() {
           fb(a.data,function(r){
             fbFoursquarePhoto(a.data,function(r){
               zomatoFbAddress(a.data,function(r){
+                renderReviews(a.data)
                 $(document).on("scroll", onScroll)
                 loadTwitterApi()
                 scrollByMenu()
@@ -23,6 +24,7 @@ $(document).ready(function() {
           fb(a.data,function(r){
             fbPhoto(a.data,function(r){
               zomatoFbAddress(a.data,function(r){
+                renderReviews(a.data)
                 $(document).on("scroll", onScroll)
                 loadTwitterApi()
                 scrollByMenu()
@@ -33,6 +35,7 @@ $(document).ready(function() {
           fb(a.data,function(r){
             fbFoursquarePhoto(a.data,function(r){
               fbAddress(a.data,function(r){
+                renderReviews(a.data)
                 $(document).on("scroll", onScroll)
                 loadTwitterApi()
                 scrollByMenu()
@@ -319,7 +322,6 @@ if(callback)
 callback()
 }
 function fb(r,callback){
-  render(".storyPage", "storyPage", {tag:quotes[Math.floor((Math.random() * 5))].tag,name:r.fb.name})
   render(".welcomePageContainer", "welcomePage", {
     image: r.fb.cover.source
   })
@@ -344,6 +346,7 @@ function fb(r,callback){
         callback()
 }
 function fbAddress(r,callback){
+  render(".storyPage", "storyPage", {tag:quotes[Math.floor((Math.random() * 5))].tag,name:r.fb.name})
   r.fb.address = ''
   if (r.fb.location) {
       if (r.fb.location && r.fb.location.country) {
@@ -379,6 +382,7 @@ function fbAddress(r,callback){
   callback()
 }
 function zomatoFbAddress(r,callback){
+  render(".storyPage", "storyPage", {tag:quotes[Math.floor((Math.random() * 5))].tag,name:r.fb.name})
   r.zomato.address = ''
   r.zomato.street = ''
   r.fb.address = ''
@@ -399,7 +403,6 @@ function zomatoFbAddress(r,callback){
           address: r.fb.address,
           street: r.zomato.street
       })
-      renderReviews(r.zomato.reviews)
       var mapUrl
     if(r.fb.location&&r.fb.location.latitude){
         mapUrl = "https://maps.google.com/maps?q=" + r.fb.location.latitude + "," + r.fb.location.longitude + "&hl=es;z=14&amp;output=embed";
@@ -420,17 +423,37 @@ function zomatoFbAddress(r,callback){
   if(callback)
   callback()
 }
-function renderReviews(data) {
-    if (data.user_reviews) {
+function renderReviews(r) {
+  data = {user_reviews:[]}
+  if(r.zomato&&r.zomato.reviews)
+  data1 = r.zomato.reviews
+
+    if (r.zomato&&r.zomato.reviews&&data1.user_reviews) {
         var i = 0;
-        for (var r of data.user_reviews) {
-            if (i == 0)
+        for (var u of data1.user_reviews) {
+            if (i == 0&&!r.foursquare)
                 r.first = 1
             i++
-            r.image = r.review.user.profile_image
-            r.review_text = r.review.review_text
-            r.user = r.review.user.name
+            u.image = u.review.user.profile_image
+            u.review_text = u.review.review_text
+            u.user = u.review.user.name
+            data.user_reviews.push(u)
         }
+      }
+      if(r.foursquare&&r.foursquare.reviews&&r.foursquare.reviews.groups&&r.foursquare.reviews.groups[1]){
+        var i = 0;
+        for(var u of r.foursquare.reviews.groups[1].items){
+          if(!r.zomato){
+          if (i == 0)
+              r.first = 1
+          i++
+          }
+          u.image = u.user.photo.prefix+'100x100'+u.user.photo.suffix
+          u.review_text = u.text
+          u.user = u.user.firstName
+          data.user_reviews.push(u)
+        }
+      }
         data.type = reviewSelecter[Math.floor((Math.random() * 3))].type
         if(data.type == 'typeOne'){
           render("."+data.type, "review", data);
@@ -452,7 +475,6 @@ function renderReviews(data) {
                 $('.reviewContainer').removeClass('slideUp');
             })
         });
-    }
 }
 
 function renderEvents(events) {

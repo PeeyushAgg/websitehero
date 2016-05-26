@@ -53,9 +53,9 @@ app.post('/preview/:id',function(req, res){
       })
       })
     } else if(r[0]!='0'&&r[1]!='0'&&r[2]=='0'){
-      getFbPageDetails(r[0],function(r){
+      getFbPageDetails(r[0],function(r1){
         var data = {}
-        data.fb = r
+        data.fb = r1
         getZomatoPageDetails(r[1],function(r2){
         data.zomato = r2
           res.json(data)
@@ -74,18 +74,18 @@ app.post('/preview/:id',function(req, res){
         res.json({foursquare:r})
     })
     } else if(r[0]=='0'&&r[1]!='0'&&r[2]!='0'){
-      getZomatoPageDetails(r[1],function(r){
+      getZomatoPageDetails(r[1],function(r1){
         var data = {}
-        data.zomato = r
+        data.zomato = r1
       getFourSquareVenueDetail(r[2], function(r2){
         data.foursquare = r2
         res.json(data)
     })
       })
     } else if(r[0]!='0'&&r[1]=='0'&&r[2]!='0'){
-      getFbPageDetails(r[0],function(r){
+      getFbPageDetails(r[0],function(r1){
         var data = {}
-        data.fb = r
+        data.fb = r1
         getFourSquareVenueDetail(r[2], function(r2){
           data.foursquare = r2
           res.json(data)
@@ -245,6 +245,7 @@ function getFbPageDetails(id,callback){
 
 }
 function getZomatoPageDetails(id,callback){
+  console.log(id);
   getRestaurantDetails(id,'restaurant',function(r){
     var obj = {};
     obj.restaurant = r;
@@ -258,8 +259,9 @@ function getZomatoPageDetails(id,callback){
 function getRestaurantDetails(id,detailType,callback){
   var url = host + '/' + detailType;
   var search = '?res_id=' + id;
-  if(detailType === 'reviews')
-  search += '&count=10';
+  if(detailType == 'reviews')
+  search += '&count=20';
+  console.log(url+search);
   var options = {
       url: url + search,
       headers: {
