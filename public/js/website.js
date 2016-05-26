@@ -99,6 +99,7 @@ $(document).ready(function() {
                 }, 500)
             },2000)
         })
+
     })
 });
 function foursquarePhoto(r,callback){
@@ -322,8 +323,13 @@ if(callback)
 callback()
 }
 function fb(r,callback){
+  var  isEvent = 0
+  if(r.fb&&r.fb.events){
+    isEvent = 1
+  }
   render(".welcomePageContainer", "welcomePage", {
-    image: r.fb.cover.source
+    image: r.fb.cover.source,
+    isEvent: isEvent
   })
     render(".restaurantName", "restaurantName", {
         name: r.fb.name
@@ -432,7 +438,7 @@ function renderReviews(r) {
     if (r.zomato&&r.zomato.reviews&&data1.user_reviews) {
         var i = 0;
         for (var u of data1.user_reviews) {
-            if (i == 0&&!r.foursquare)
+            if (i == 0)
                 u.first = 1
             i++
             u.image = u.review.user.profile_image
