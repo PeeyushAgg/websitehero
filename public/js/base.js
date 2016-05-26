@@ -1,5 +1,5 @@
 ﻿var eventToUse = 'tap';
-var appUrl = 'http://192.168.8.244:25000/';
+var appUrl = 'http://192.168.8.233:25000/';
 
 function makeTemplates() {
     var templateName = '';

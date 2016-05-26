@@ -115,6 +115,14 @@ input[type=number]::-webkit-outter-spin-button {
   background-size: cover;
   background-repeat: no-repeat;
 }
+.mainContainer .welcomePage .welcomePageOverlay {
+  position: absolute;
+  top: 6rem;
+  bottom: 0;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.68);
+  z-index: 10;
+}
 .mainContainer .welcomePage .navbarBlock {
   position: fixed;
   height: 6rem;
@@ -148,16 +156,16 @@ input[type=number]::-webkit-outter-spin-button {
   text-align: center;
   height: auto;
   padding-top: 25rem;
+  z-index: 15;
 }
 .mainContainer .welcomePage .centerTextBlock .heading {
   position: relative;
   font-family: 'Dancing Script', cursive;
-  font-size: 4.2rem;
+  font-size: 6rem;
   color: white;
 }
 .mainContainer .welcomePage .centerTextBlock .headingName {
-  font-size: 4.2rem;
-  font-weight: 500;
+  font-size: 6rem;
   color: white;
   letter-spacing: 2px;
   padding-bottom: 2rem;
@@ -673,7 +681,6 @@ input[type=number]::-webkit-outter-spin-button {
 .mainContainer .eventPage .eventContainer .eventUpperBlock {
   position: relative;
   height: 45rem;
-  padding: 0 2rem 0 0;
   margin-top: 2rem;
   box-sizing: border-box;
   font-family: 'Raleway', sans-serif;
@@ -682,6 +689,7 @@ input[type=number]::-webkit-outter-spin-button {
   position: relative;
   height: 100%;
   width: 100%;
+  border: 1px solid rgba(128, 128, 128, 0.2);
   box-sizing: border-box;
   box-shadow: -1px 4px 21px -5px rgba(0, 0, 0, 0.17);
   padding: 2rem;
@@ -700,7 +708,7 @@ input[type=number]::-webkit-outter-spin-button {
   float: left;
   height: 40%;
   width: 100%;
-  text-align: center;
+  text-align: left;
   box-sizing: border-box;
 }
 .mainContainer .eventPage .eventContainer .eventUpperBlock .eventInnerBlock .eventDetails .eventName {
@@ -782,7 +790,7 @@ input[type=number]::-webkit-outter-spin-button {
   font-weight: 100;
   box-sizing: border-box;
   color: white;
-  background: linear-gradient(to right, rgba(252, 247, 252, 0.84) 0, rgba(3, 3, 3, 0.84) 0, rgba(3, 3, 3, 0.9) 100%);
+  background: linear-gradient(to right, rgba(128, 128, 128, 0.84) 0, rgba(128, 128, 128, 0.84) 0, rgba(128, 128, 128, 0.9) 100%);
 }
 .mainContainer .eventPage .eventContainer .confirmationContainer .backEventImage .eventShortDesctiption .eventName {
   position: relative;
@@ -812,7 +820,7 @@ input[type=number]::-webkit-outter-spin-button {
   width: 100%;
   box-sizing: border-box;
   border: none;
-  font-size: 1.6rem;
+  font-size: 2rem;
   border-bottom: 0.1rem solid #e4e4e4;
   color: gray;
   background: transparent;
@@ -821,7 +829,7 @@ input[type=number]::-webkit-outter-spin-button {
 }
 .mainContainer .eventPage .eventContainer .confirmationContainer .eventDetailConatiner .detailContainer .placeholder::-webkit-input-placeholder {
   color: #C3C3C3;
-  font-size: 1.6rem;
+  font-size: 2rem;
   font-weight: 100;
 }
 .mainContainer .eventPage .eventContainer .confirmationContainer .eventDetailConatiner .selectPersonContainer {
@@ -1335,8 +1343,8 @@ input[type=number]::-webkit-outter-spin-button {
 .mainContainer .footerEnd {
   position: fixed;
   bottom: 0;
-  height: 7rem;
-  line-height: 7rem;
+  height: 6rem;
+  line-height: 6rem;
   width: 100%;
   z-index: 1300;
   background: rgba(0, 0, 0, 0.96);
@@ -1353,8 +1361,8 @@ input[type=number]::-webkit-outter-spin-button {
   width: 20rem;
   text-align: center;
   height: 4rem;
-  margin-top: 1.5rem;
-  margin-bottom: 1.5rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
   box-sizing: border-box;
   border-right: 1px solid rgba(255, 255, 255, 0.5);
 }
@@ -1512,7 +1520,7 @@ input[type=number]::-webkit-outter-spin-button {
   width: 100%;
   background: rgba(0, 0, 0, 0.7);
   height: 100%;
-  z-index: 1000;
+  z-index: 14000;
   display: none;
 }
 .imageViewer .image {

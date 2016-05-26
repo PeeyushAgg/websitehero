@@ -202,9 +202,9 @@ function renderFbZomatoData(r) {
         })
     if (r.fb.events)
         renderEvents(r.fb.events.data)
-    $(document).on("scroll", onScroll)
-    loadTwitterApi()
-    scrollByMenu()
+    // $(document).on("scroll", onScroll)
+    // loadTwitterApi()
+    // scrollByMenu()
 }
 
 function renderZomatoData(r) {
@@ -438,9 +438,9 @@ function renderFbZomatoFourSquare(r){
       })
   if (r.fb.events)
       renderEvents(r.fb.events.data)
-  $(document).on("scroll", onScroll)
-  loadTwitterApi()
-  scrollByMenu()
+  // $(document).on("scroll", onScroll)
+  // loadTwitterApi()
+  // scrollByMenu()
 }
 function renderReviews(data) {
     if (data.user_reviews) {
