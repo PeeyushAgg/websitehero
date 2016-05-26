@@ -427,12 +427,13 @@ function renderReviews(r) {
   data = {user_reviews:[]}
   if(r.zomato&&r.zomato.reviews)
   data1 = r.zomato.reviews
-
+  data.type = reviewSelecter[Math.floor((Math.random() * 3))].type
+  $("."+data.type).css('display','block')
     if (r.zomato&&r.zomato.reviews&&data1.user_reviews) {
         var i = 0;
         for (var u of data1.user_reviews) {
             if (i == 0&&!r.foursquare)
-                r.first = 1
+                u.first = 1
             i++
             u.image = u.review.user.profile_image
             u.review_text = u.review.review_text
@@ -445,7 +446,7 @@ function renderReviews(r) {
         for(var u of r.foursquare.reviews.groups[1].items){
           if(!r.zomato){
           if (i == 0)
-              r.first = 1
+              u.first = 1
           i++
           }
           u.image = u.user.photo.prefix+'100x100'+u.user.photo.suffix
@@ -454,13 +455,11 @@ function renderReviews(r) {
           data.user_reviews.push(u)
         }
       }
-        data.type = reviewSelecter[Math.floor((Math.random() * 3))].type
         if(data.type == 'typeOne'){
           render("."+data.type, "review", data);
         }else{
           render("."+data.type, "review", {type:data.type,user_reviews:data.user_reviews.slice(0,4)});
         }
-          $("."+data.type).css('display','block')
         bind('.btnViewMore', function() {
             $('.carousalOverlay').css('display', 'block');
             $('.mainContainer').css('overflow-y', 'hidden');
