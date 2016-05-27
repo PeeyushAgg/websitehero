@@ -14,9 +14,10 @@ $(document).ready(function() {
             fbFoursquarePhoto(a.data,function(r){
               zomatoFbAddress(a.data,function(r){
                 renderReviews(a.data)
-                // $(document).on("scroll", onScroll)
-                // loadTwitterApi()
-                // scrollByMenu()
+                bindIcons(a.data.fb.link,a.data.foursquare.link,a.data.zomato.restaurant.url)
+                $(document).on("scroll", onScroll)
+                loadTwitterApi()
+                scrollByMenu()
               })
             })
           })
@@ -25,6 +26,7 @@ $(document).ready(function() {
             fbPhoto(a.data,function(r){
               zomatoFbAddress(a.data,function(r){
                 renderReviews(a.data)
+                bindIcons(a.data.fb.link,'',a.data.zomato.restaurant.url)
                 $(document).on("scroll", onScroll)
                 loadTwitterApi()
                 scrollByMenu()
@@ -36,6 +38,7 @@ $(document).ready(function() {
             fbFoursquarePhoto(a.data,function(r){
               fbAddress(a.data,function(r){
                 renderReviews(a.data)
+                bindIcons(a.data.fb.link,a.data.foursquare.link,'')
                 $(document).on("scroll", onScroll)
                 loadTwitterApi()
                 scrollByMenu()
@@ -46,6 +49,7 @@ $(document).ready(function() {
           fb(a.data,function(r){
             fbPhoto(a.data,function(r){
               fbAddress(a.data,function(r){
+                bindIcons(a.data.fb.link,'','')
                 $(document).on("scroll", onScroll)
                 loadTwitterApi()
                 scrollByMenu()
@@ -55,7 +59,6 @@ $(document).ready(function() {
         } else{
           //not much available data
         }
-        loadFbApi(a.data.fb?a.data.fb.picture.data.url:'')
         loadTwitterApi()
         $('.widgetNew').mouseenter(function(){
             $(this).css('width','13rem');
@@ -209,7 +212,7 @@ function fbPhoto(r,callback){
   render(".imageContainer", "image", r.fb.photos.data.length<=12?r.fb.photos.data:r.fb.photos.data.slice(0, 12));
   bind('.imageBlock',function(){
     var shift = 0
-    var windowWidth = ($( window ).width()-80)
+    var windowWidth = ($( window ).width()-200)
     $(".imageViewer").css('display','block')
     $('.carousalOverlay').css('display', 'block');
     $('.mainContainer').css('overflow-y', 'hidden');
@@ -225,7 +228,6 @@ function fbPhoto(r,callback){
       $( ".bottomImageContainer" ).mousemove(function( event ) {
           var msg = "Handler for .mousemove() called at ";
           msg += event.pageX + ", " + event.pageY;
-          console.log($('.bottomImageBlock').height()*r.fb.photos.data.length);
           if(event.pageX > windowWidth && shift > itemWidth){
             shift-=2
             $( ".bottomImageContainer" ).css('left',shift+'rem')
@@ -247,13 +249,18 @@ function fbPhoto(r,callback){
       bind('.nextBtn',function(){
         var id = $('.activeImage').attr('data-id')
         if(id<r.fb.photos.data.length-1){
-          $('#bottomImage'+$('.activeImage').attr('data-id')).removeClass('activeBottomImage')
+        $('#bottomImage'+$('.activeImage').attr('data-id')).removeClass('activeBottomImage')
         $('#image'+id).removeClass('activeImage')
         $('#imageImg'+id).removeClass('activeImg')
         id++
         $('#bottomImage'+id).addClass('activeBottomImage')
         $('#image'+id).addClass('activeImage')
         $('#imageImg'+id).addClass('activeImg')
+        if($( window ).width()<-(shift+itemWidth-$('.bottomImageBlock').width()*id-20)&&shift > itemWidth)
+        {
+          shift-=12
+          $( ".bottomImageContainer" ).css('left',shift+'rem')
+        }
       }
       })
       bind('.cross', function(){
@@ -272,11 +279,15 @@ function fbPhoto(r,callback){
         $('#bottomImage'+id).addClass('activeBottomImage')
         $('#image'+id).addClass('activeImage')
         $('#imageImg'+id).addClass('activeImg')
+        if(0<-(shift-$('.bottomImageBlock').width()*id-20)&& shift<-12 )
+        {
+          shift+=12
+          $( ".bottomImageContainer" ).css('left',shift+'rem')
+        }
       }
       })
   })
   if(r.fb.photos.data.length>12){
-
   bind('.imageViewerTab', function(){
     var shift = 0
     var windowWidth = ($( window ).width()-80)
@@ -309,7 +320,6 @@ function fbPhoto(r,callback){
         $('#image'+id).addClass('activeImage')
         $('#imageImg'+id).addClass('activeImg')
     })
-
     bind('.nextBtn',function(){
       var id = $('.activeImage').attr('data-id')
       if(id<r.fb.photos.data.length-1){
@@ -386,7 +396,7 @@ function fbFoursquarePhoto(r,callback){
   render(".imageContainer", "image", r.fb.photos.data.length<=12?r.fb.photos.data:r.fb.photos.data.slice(0, 12));
   bind('.imageBlock',function(){
     var shift = 0
-    var windowWidth = ($( window ).width()-80)
+    var windowWidth = ($( window ).width()-200)
     $(".imageViewer").css('display','block')
     $('.carousalOverlay').css('display', 'block');
     $('.mainContainer').css('overflow-y', 'hidden');
@@ -402,7 +412,6 @@ function fbFoursquarePhoto(r,callback){
       $( ".bottomImageContainer" ).mousemove(function( event ) {
           var msg = "Handler for .mousemove() called at ";
           msg += event.pageX + ", " + event.pageY;
-          console.log($('.bottomImageBlock').height()*r.fb.photos.data.length);
           if(event.pageX > windowWidth && shift > itemWidth){
             shift-=2
             $( ".bottomImageContainer" ).css('left',shift+'rem')
@@ -424,13 +433,18 @@ function fbFoursquarePhoto(r,callback){
       bind('.nextBtn',function(){
         var id = $('.activeImage').attr('data-id')
         if(id<r.fb.photos.data.length-1){
-          $('#bottomImage'+$('.activeImage').attr('data-id')).removeClass('activeBottomImage')
+        $('#bottomImage'+$('.activeImage').attr('data-id')).removeClass('activeBottomImage')
         $('#image'+id).removeClass('activeImage')
         $('#imageImg'+id).removeClass('activeImg')
         id++
         $('#bottomImage'+id).addClass('activeBottomImage')
         $('#image'+id).addClass('activeImage')
         $('#imageImg'+id).addClass('activeImg')
+        if($( window ).width()<-(shift+itemWidth-$('.bottomImageBlock').width()*id-20)&&shift > itemWidth)
+        {
+          shift-=12
+          $( ".bottomImageContainer" ).css('left',shift+'rem')
+        }
       }
       })
       bind('.cross', function(){
@@ -449,6 +463,11 @@ function fbFoursquarePhoto(r,callback){
         $('#bottomImage'+id).addClass('activeBottomImage')
         $('#image'+id).addClass('activeImage')
         $('#imageImg'+id).addClass('activeImg')
+        if(0<-(shift-$('.bottomImageBlock').width()*id-20)&& shift<-12 )
+        {
+          shift+=12
+          $( ".bottomImageContainer" ).css('left',shift+'rem')
+        }
       }
       })
   })
@@ -543,7 +562,7 @@ function fb(r,callback){
         render(".aboutDescription", "restaurantName", {
             name: r.fb.about
         });
-        if ($('.aboutDescription').height() < 70) {
+        if ($('.aboutDescription').height() < 140) {
             $('.btnReadMore').css('visibility', 'hidden')
         }
         if(callback)
@@ -718,7 +737,6 @@ function renderEvents(events) {
         }
     }
 }
-
 function showConfirmationContainer(id,events) {
   var data = JSLINQ(events)
     .Where(function(x){
@@ -765,37 +783,6 @@ function showThankYouContainer() {
     }
 }
 
-function loadFbApi(image) {
-    window.fbAsyncInit = function() {
-        FB.init({
-            appId: '1001533829900641',
-            status: true,
-            cookie: true,
-            xfbml: true
-        });
-    };
-    (function() {
-        var e = document.createElement('script');
-        e.async = true;
-        e.src = document.location.protocol +
-            '//connect.facebook.net/en_US/all.js';
-        document.getElementById('fb-root').appendChild(e);
-    }());
-    bind('.facebookBtn', function() {
-        var url = window.location.href;
-        console.log(image);
-        FB.ui({
-            method: 'feed',
-            name: 'My Custom Website',
-            link: url,
-            picture: image,
-            caption: '',
-            description: "Create Your own custom website : " + url,
-            message: ''
-        });
-    })
-}
-
 function loadTwitterApi() {
     ! function(d, s, id) {
         var js, fjs = d.getElementsByTagName(s)[0],
@@ -822,7 +809,6 @@ function onScroll(event) {
         }
     });
 }
-
 function scrollByMenu() {
     $('.option').on('click', function(e) {
         e.preventDefault();
@@ -844,4 +830,21 @@ function scrollByMenu() {
             $(document).on("scroll", onScroll);
         });
     });
+}
+function bindIcons(fb,foursquare,zomato){
+  if(zomato){
+    bind('.third',function(){
+      window.open(zomato, '_blank');
+    })
+  }
+  if(foursquare){
+    bind('.forth',function(){
+      window.open(foursquare, '_blank');
+    })
+  }
+  if(fb){
+    bind('.first',function(){
+      window.open(fb, '_blank');
+    })
+  }
 }

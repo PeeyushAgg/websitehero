@@ -230,7 +230,7 @@ function convertToId(value){
 }
 function getFbPageDetails(id,callback){
     var options = {
-        url: 'https://graph.facebook.com/'+id+'/?fields=name,id,likes,about,phone,hours,description,albums.limit(6){photos.limit(10).height(300){images}},restaurant_services,cover.height(800),picture,events.limit(6){cover,name,start_time,place},posts.limit(6){message,full_picture,description},location&access_token='+accessToken
+        url: 'https://graph.facebook.com/'+id+'/?fields=name,id,likes,link,about,phone,hours,description,albums.limit(6){photos.limit(10).height(300){images}},restaurant_services,cover.height(800),picture,events.limit(6){cover,name,start_time,place},posts.limit(6){message,full_picture,description},location&access_token='+accessToken
     };
     request(options, function(req, res, error) {
       var r;
@@ -302,12 +302,14 @@ function getFourSquareVenueDetail(id,callback){
         var obj = {}
         if(res){
           r = JSON.parse(res.body);
+          console.log(r)
           if(r.response.venue){
             r = r.response.venue
             obj._id  = id
             obj.name = r.name
             obj.contact = r.contact
             obj.location = r.location
+            obj.link = r.canonicalUrl
             obj.stats = r.stats
             obj.likes = r.likes
             obj.rating = r.rating

@@ -43,24 +43,20 @@
       </a>
     </div>
     <div class="widgetNew third">
-      <a href="https://www.zomato.com/" target="_blank">
         <div class="image">
           <img src="../images/zomato.jpg">
         </div>
         <div class="text hide">
           Zomato
         </div>
-      </a>
     </div>
     <div class="widgetNew forth">
-      <a href="https://www.zomato.com/" target="_blank">
         <div class="image">
           <img src="../images/foursquare.png">
         </div>
         <div class="text hide">
           Foursquare
         </div>
-      </a>
     </div>
   </div>
   <div class="mainContainer" >
@@ -561,6 +557,7 @@
       <div class="cross"> <img src="../images/cross.png" class="crossIcon"></div>
       <div class="bottomImageContainer">
       {{each(index,value) data}}
+
         <div class="bottomImageBlock" id="bottomImage{{html count}}" data-id = "{{html count}}" style='background-image : url("{{html images[3]?images[3].source:images[0].source}}")'>
         </div>
         {{/each}}

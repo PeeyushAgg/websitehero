@@ -36,6 +36,12 @@ input[type=number]::-webkit-outter-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
+.show {
+  display: block;
+}
+.hide {
+  display: none;
+}
 .carousalOverlay {
   position: fixed;
   top: 0;
@@ -89,13 +95,13 @@ input[type=number]::-webkit-outter-spin-button {
       background: #1da1f2;
       top: 8.2rem;
     }
-    &.third{
-        background: #cb202d;
-        top:12.4rem;
+    &.third {
+      background: #cb202d;
+      top: 12.4rem;
     }
-    &.forth{
-        background: #fc4575;
-        top:16.6rem;
+    &.forth {
+      background: #fc4575;
+      top: 16.6rem;
     }
   }
 }
@@ -256,7 +262,7 @@ input[type=number]::-webkit-outter-spin-button {
     .aboutDescription {
       position: relative;
       padding: 4rem 1.6rem 1.6rem;
-      max-height: 17rem;
+      max-height: 22rem;
       overflow: hidden;
       font-size: 1.6rem;
       color: #3b4140;
@@ -1583,11 +1589,17 @@ input[type=number]::-webkit-outter-spin-button {
       background-repeat: no-repeat;
       background-position: center;
       background-size: cover;
-      border-right: 2px solid rgba(255,255,255,0.2);
-      border-top: 2px solid rgba(255,255,255,0.2);
+      border-right: 10px solid rgba(0,0,0,1);
+      border-top: 10px solid rgba(0,0,0,1);
+      .bottomImageOverlay {
+        position: relative;
+        height: 100%;
+        width: 100%;
+        background: rgba(0,0,0,0.8);
+      }
     }
-    .activeBottomImage{
-      border: 0.3rem rgba(12, 12, 255, 0.67) solid;
+    .activeBottomImage {
+      border: 4px solid white;
     }
   }
   .preBtn {
@@ -1618,9 +1630,9 @@ input[type=number]::-webkit-outter-spin-button {
   }
   .crossIcon {
     position: absolute;
-    height: 4rem;
-    right: 1rem;
-    top: 1rem;
+    height: 3rem;
+    right: 2rem;
+    top: 2rem;
     cursor: pointer;
   }
 }
