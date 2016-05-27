@@ -245,12 +245,18 @@ function fbPhoto(r,callback){
       })
   })
   if(r.fb.photos.data.length>12){
+
   bind('.imageViewerTab', function(){
     $(".imageViewer").css('display','block')
     $('.carousalOverlay').css('display', 'block');
     $('.mainContainer').css('overflow-y', 'hidden');
     $(".imageViewer").get(0).scrollIntoView();
     render(".imageViewer", "imageViewer", {data:r.fb.photos.data})
+    $(".bottomImageBlock").hover(function(){
+        $(this).css("background-color", "yellow");
+        }, function(){
+        $(this).css("background-color", "pink");
+    });
     bind('.nextBtn',function(){
       var id = $('.activeImage').attr('data-id')
       if(id<r.fb.photos.data.length-1){
