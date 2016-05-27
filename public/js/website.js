@@ -276,6 +276,7 @@ function fbPhoto(r,callback){
       })
   })
   if(r.fb.photos.data.length>12){
+
   bind('.imageViewerTab', function(){
     var shift = 0
     var windowWidth = ($( window ).width()-80)
@@ -308,6 +309,7 @@ function fbPhoto(r,callback){
         $('#image'+id).addClass('activeImage')
         $('#imageImg'+id).addClass('activeImg')
     })
+
     bind('.nextBtn',function(){
       var id = $('.activeImage').attr('data-id')
       if(id<r.fb.photos.data.length-1){

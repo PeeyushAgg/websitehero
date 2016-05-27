@@ -89,6 +89,14 @@ input[type=number]::-webkit-outter-spin-button {
       background: #1da1f2;
       top: 8.2rem;
     }
+    &.third{
+        background: #cb202d;
+        top:12.4rem;
+    }
+    &.forth{
+        background: #fc4575;
+        top:16.6rem;
+    }
   }
 }
 .mainContainer {
@@ -108,7 +116,6 @@ input[type=number]::-webkit-outter-spin-button {
       top: 50%;
       left: 50%;
       width: 25rem;
-      transform: translate(-50%,-50%);
       -webkit-transform: translate(-50%,-50%);
     }
   }
@@ -313,7 +320,7 @@ input[type=number]::-webkit-outter-spin-button {
         font-weight: 600;
         left: 50%;
         z-index: 2;
-        transform: translateX(-50%);
+        -webkit-transform: translateX(-50%);
         border: 1px solid #dfa240;
       }
       .paralexHeading {
@@ -397,7 +404,7 @@ input[type=number]::-webkit-outter-spin-button {
                 height: auto;
                 width: auto;
                 left: 50%;
-                transform: translateX(-50%);
+                -webkit-transform: translateX(-50%);
                 .reviewMemberImage {
                   position: relative;
                   float: left;
@@ -780,7 +787,7 @@ input[type=number]::-webkit-outter-spin-button {
         top: 10rem;
         left: 50%;
         display: none;
-        transform: translate(-50%);
+        -webkit-transform: translate(-50%);
         .backEventImage {
           position: relative;
           float: left;
@@ -1048,7 +1055,7 @@ input[type=number]::-webkit-outter-spin-button {
           text-align: center;
           top: 50%;
           width: 100%;
-          transform: translateY(-50%);
+          -webkit-transform: translateY(-50%);
         }
         .crossIcon {
           position: absolute;
@@ -1315,7 +1322,7 @@ input[type=number]::-webkit-outter-spin-button {
               text-align: center;
               left: 50%;
               top: 50%;
-              transform: translate(-50%,-50%);
+              -webkit-transform: translate(-50%,-50%);
               .cameraIcon {
                 position: relative;
                 height: 5rem;
@@ -1390,7 +1397,7 @@ input[type=number]::-webkit-outter-spin-button {
           height: 3rem;
           top: 50%;
           right: 3rem;
-          transform: translateY(-50%);
+          -webkit-transform: translateY(-50%);
         }
       }
       .footerText {
@@ -1515,7 +1522,7 @@ input[type=number]::-webkit-outter-spin-button {
   clear: both;
   left: 50%;
   top: 50%;
-  transform: translate(-50%,-50%);
+  -webkit-transform: translate(-50%,-50%);
   margin: 10px auto;
   padding: 0;
   background-color: #990000;
@@ -1576,7 +1583,8 @@ input[type=number]::-webkit-outter-spin-button {
       background-repeat: no-repeat;
       background-position: center;
       background-size: cover;
-      border-right: 1px solid rgba(128, 128, 128, 0.4);
+      border-right: 2px solid rgba(255,255,255,0.2);
+      border-top: 2px solid rgba(255,255,255,0.2);
     }
     .activeBottomImage{
       border: 0.3rem rgba(12, 12, 255, 0.67) solid;
@@ -1587,7 +1595,7 @@ input[type=number]::-webkit-outter-spin-button {
     left: 2rem;
     width: 5rem;
     top: 50%;
-    transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
     height: 5rem;
     background-image: url('../images/leftArrow.png');
     background-position: center;
@@ -1600,7 +1608,7 @@ input[type=number]::-webkit-outter-spin-button {
     right: 2rem;
     width: 5rem;
     top: 50%;
-    transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
     height: 5rem;
     background-image: url('../images/rightScroll.png');
     background-position: center;
