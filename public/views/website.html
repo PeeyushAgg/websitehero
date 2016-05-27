@@ -541,7 +541,7 @@
       <div class="cross"> <img src="../images/cross.png" class="crossIcon"></div>
       <div class="bottomImageContainer">
       {{each(index,value) data}}
-        <div class="bottomImageBlock" id='#bottomImg{{html count}}' style='background-image : url("{{html images[3]?images[3].source:images[0].source}}")'>
+        <div class="bottomImageBlock" id="bottomImage{{html count}}" data-id = "{{html count}}" style='background-image : url("{{html images[3]?images[3].source:images[0].source}}")'>
         </div>
         {{/each}}
       </div>
