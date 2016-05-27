@@ -1286,6 +1286,7 @@ input[type=number]::-webkit-outter-spin-button {
   padding-left: 0;
   height: 22rem;
   margin-top: 1.5rem;
+  cursor: pointer;
 }
 .mainContainer .galleryPage .galleryContainer .imageContainer .overlay .block {
   position: relative;
