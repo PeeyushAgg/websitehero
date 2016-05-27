@@ -252,11 +252,7 @@ function fbPhoto(r,callback){
     $('.mainContainer').css('overflow-y', 'hidden');
     $(".imageViewer").get(0).scrollIntoView();
     render(".imageViewer", "imageViewer", {data:r.fb.photos.data})
-    $(".bottomImageBlock").hover(function(){
-        $(this).css("background-color", "yellow");
-        }, function(){
-        $(this).css("background-color", "pink");
-    });
+
     bind('.nextBtn',function(){
       var id = $('.activeImage').attr('data-id')
       if(id<r.fb.photos.data.length-1){
