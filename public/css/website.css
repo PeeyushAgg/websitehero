@@ -1283,7 +1283,7 @@ input[type=number]::-webkit-outter-spin-button {
   position: relative;
   float: left;
   padding-left: 0;
-  height: 30rem;
+  height: 22rem;
   margin-top: 1.5rem;
 }
 .mainContainer .galleryPage .galleryContainer .imageContainer .overlay .block {
@@ -1308,8 +1308,6 @@ input[type=number]::-webkit-outter-spin-button {
 }
 .mainContainer .galleryPage .galleryContainer .imageContainer .overlay .lastblock .cameraBlock {
   position: absolute;
-  height: 15rem;
-  width: 25rem;
   text-align: center;
   left: 50%;
   top: 50%;
@@ -1317,11 +1315,11 @@ input[type=number]::-webkit-outter-spin-button {
 }
 .mainContainer .galleryPage .galleryContainer .imageContainer .overlay .lastblock .cameraBlock .cameraIcon {
   position: relative;
-  height: 10rem;
+  height: 5rem;
 }
 .mainContainer .galleryPage .galleryContainer .imageContainer .overlay .lastblock .cameraBlock .cameraText {
   color: #dfa240;
-  font-size: 2rem;
+  font-size: 1.6rem;
   font-weight: 500;
 }
 .mainContainer .dividerMap {
@@ -1342,7 +1340,7 @@ input[type=number]::-webkit-outter-spin-button {
 }
 .mainContainer .mapPage .mapAddress {
   position: absolute;
-  height: 7.3rem;
+  height: 5rem;
   width: 19rem;
   background: white;
   top: 2rem;

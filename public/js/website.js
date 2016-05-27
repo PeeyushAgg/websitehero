@@ -14,9 +14,9 @@ $(document).ready(function() {
             fbFoursquarePhoto(a.data,function(r){
               zomatoFbAddress(a.data,function(r){
                 renderReviews(a.data)
-                $(document).on("scroll", onScroll)
-                loadTwitterApi()
-                scrollByMenu()
+                // $(document).on("scroll", onScroll)
+                // loadTwitterApi()
+                // scrollByMenu()
               })
             })
           })
@@ -128,12 +128,12 @@ function foursquarePhoto(r,callback){
     quote: quotes[Math.floor((Math.random() * 5))].text,
     name: r.fb.name
   })
-  if(r.fb.photos.data.length>9){
-    r.fb.photos.data[8].total = r.fb.photos.data.length
+  if(r.fb.photos.data.length>12){
+    r.fb.photos.data[11].total = r.fb.photos.data.length
   }
-  console.log(r.fb.photos.data[8])
-  render(".imageContainer", "image", r.fb.photos.data.length<=9?r.fb.photos.data:r.fb.photos.data.slice(0, 9));
-  if(r.fb.photos.data.length>9){
+  console.log(r.fb.photos.data[11])
+  render(".imageContainer", "image", r.fb.photos.data.length<=12?r.fb.photos.data:r.fb.photos.data.slice(0, 12));
+  if(r.fb.photos.data.length>12){
   bind('.imageViewerTab', function(){
     $(".imageViewer").css('display','block')
     $('.carousalOverlay').css('display', 'block');
@@ -200,12 +200,12 @@ function fbPhoto(r,callback){
     quote: quotes[Math.floor((Math.random() * 5))].text,
     name: r.fb.name
   })
-  if(r.fb.photos.data.length>9){
-    r.fb.photos.data[8].total = r.fb.photos.data.length
+  if(r.fb.photos.data.length>12){
+    r.fb.photos.data[11].total = r.fb.photos.data.length
   }
-  console.log(r.fb.photos.data[8])
-  render(".imageContainer", "image", r.fb.photos.data.length<=9?r.fb.photos.data:r.fb.photos.data.slice(0, 9));
-  if(r.fb.photos.data.length>9){
+  console.log(r.fb.photos.data[11])
+  render(".imageContainer", "image", r.fb.photos.data.length<=12?r.fb.photos.data:r.fb.photos.data.slice(0, 12));
+  if(r.fb.photos.data.length>12){
   bind('.imageViewerTab', function(){
     $(".imageViewer").css('display','block')
     $('.carousalOverlay').css('display', 'block');
@@ -278,12 +278,12 @@ function fbFoursquarePhoto(r,callback){
     quote: quotes[Math.floor((Math.random() * 5))].text,
     name: r.fb.name
   })
-  if(r.fb.photos.data.length>9){
-    r.fb.photos.data[8].total = r.fb.photos.data.length
+  if(r.fb.photos.data.length>12){
+    r.fb.photos.data[11].total = r.fb.photos.data.length
   }
-  console.log(r.fb.photos.data[8])
-  render(".imageContainer", "image", r.fb.photos.data.length<=9?r.fb.photos.data:r.fb.photos.data.slice(0, 9));
-  if(r.fb.photos.data.length>9){
+  console.log(r.fb.photos.data[11])
+  render(".imageContainer", "image", r.fb.photos.data.length<=12?r.fb.photos.data:r.fb.photos.data.slice(0, 12));
+  if(r.fb.photos.data.length>12){
   bind('.imageViewerTab', function(){
     $(".imageViewer").css('display','block')
     $('.carousalOverlay').css('display', 'block');
