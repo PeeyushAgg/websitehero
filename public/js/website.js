@@ -208,21 +208,50 @@ function fbPhoto(r,callback){
   console.log(r.fb.photos.data[11])
   render(".imageContainer", "image", r.fb.photos.data.length<=12?r.fb.photos.data:r.fb.photos.data.slice(0, 12));
   bind('.imageBlock',function(){
+    var shift = 0
+    var windowWidth = ($( window ).width()-80)
     $(".imageViewer").css('display','block')
     $('.carousalOverlay').css('display', 'block');
     $('.mainContainer').css('overflow-y', 'hidden');
     $(".imageViewer").get(0).scrollIntoView();
     render(".imageViewer", "imageViewer", {data:r.fb.photos.data})
+    var itemWidth = -$('.bottomImageBlock').width()*r.fb.photos.data.length/10 + 40 + $( window ).width()/20
+    $('#bottomImage'+$('.activeImage').attr('data-id')).removeClass('activeBottomImage')
     $('#imageImg'+$('.activeImage').attr('data-id')).removeClass('activeImg')
     $('#image'+$('.activeImage').attr('data-id')).removeClass('activeImage')
       $('#image'+$(this).attr('data-id')).addClass('activeImage')
       $('#imageImg'+$(this).attr('data-id')).addClass('activeImg')
+      $('#bottomImage'+$('.activeImage').attr('data-id')).addClass('activeBottomImage')
+      $( ".bottomImageContainer" ).mousemove(function( event ) {
+          var msg = "Handler for .mousemove() called at ";
+          msg += event.pageX + ", " + event.pageY;
+          console.log($('.bottomImageBlock').height()*r.fb.photos.data.length);
+          if(event.pageX > windowWidth && shift > itemWidth){
+            shift-=2
+            $( ".bottomImageContainer" ).css('left',shift+'rem')
+          }
+          if(event.pageX > 0 && event.pageX <70 && shift<-2 ){
+            shift+=2
+            $( ".bottomImageContainer" ).css('left',shift+'rem')
+          }
+        });
+      bind('.bottomImageBlock', function(){
+        var id = $(this).attr('data-id')
+        $('#bottomImage'+$('.activeImage').attr('data-id')).removeClass('activeBottomImage')
+        $(this).addClass('activeBottomImage')
+        $('#imageImg'+$('.activeImage').attr('data-id')).removeClass('activeImg')
+        $('#image'+$('.activeImage').attr('data-id')).removeClass('activeImage')
+          $('#image'+id).addClass('activeImage')
+          $('#imageImg'+id).addClass('activeImg')
+      })
       bind('.nextBtn',function(){
         var id = $('.activeImage').attr('data-id')
         if(id<r.fb.photos.data.length-1){
+          $('#bottomImage'+$('.activeImage').attr('data-id')).removeClass('activeBottomImage')
         $('#image'+id).removeClass('activeImage')
         $('#imageImg'+id).removeClass('activeImg')
         id++
+        $('#bottomImage'+id).addClass('activeBottomImage')
         $('#image'+id).addClass('activeImage')
         $('#imageImg'+id).addClass('activeImg')
       }
@@ -236,9 +265,11 @@ function fbPhoto(r,callback){
       bind('.preBtn',function(){
         var id = $('.activeImage').attr('data-id')
         if(id>0){
+          $('#bottomImage'+$('.activeImage').attr('data-id')).removeClass('activeBottomImage')
         $('#image'+id).removeClass('activeImage')
         $('#imageImg'+id).removeClass('activeImg')
         id--
+        $('#bottomImage'+id).addClass('activeBottomImage')
         $('#image'+id).addClass('activeImage')
         $('#imageImg'+id).addClass('activeImg')
       }
@@ -247,18 +278,46 @@ function fbPhoto(r,callback){
   if(r.fb.photos.data.length>12){
 
   bind('.imageViewerTab', function(){
+    var shift = 0
+    var windowWidth = ($( window ).width()-80)
     $(".imageViewer").css('display','block')
     $('.carousalOverlay').css('display', 'block');
     $('.mainContainer').css('overflow-y', 'hidden');
     $(".imageViewer").get(0).scrollIntoView();
     render(".imageViewer", "imageViewer", {data:r.fb.photos.data})
 
+    var itemWidth = -$('.bottomImageBlock').width()*r.fb.photos.data.length/10 + 40 + $( window ).width()/20
+    $( ".bottomImageContainer" ).mousemove(function( event ) {
+        var msg = "Handler for .mousemove() called at ";
+        msg += event.pageX + ", " + event.pageY;
+        console.log($('.bottomImageBlock').height()*r.fb.photos.data.length);
+        if(event.pageX > windowWidth && shift > itemWidth){
+          shift-=2
+          $( ".bottomImageContainer" ).css('left',shift+'rem')
+        }
+        if(event.pageX > 0 && event.pageX <70 && shift<-2 ){
+          shift+=2
+          $( ".bottomImageContainer" ).css('left',shift+'rem')
+        }
+
+      });
+    bind('.bottomImageBlock', function(){
+      var id = $(this).attr('data-id')
+      $('#bottomImage'+$('.activeImage').attr('data-id')).removeClass('activeBottomImage')
+      $(this).addClass('activeBottomImage')
+      $('#imageImg'+$('.activeImage').attr('data-id')).removeClass('activeImg')
+      $('#image'+$('.activeImage').attr('data-id')).removeClass('activeImage')
+        $('#image'+id).addClass('activeImage')
+        $('#imageImg'+id).addClass('activeImg')
+    })
     bind('.nextBtn',function(){
       var id = $('.activeImage').attr('data-id')
       if(id<r.fb.photos.data.length-1){
+        $('#bottomImage'+$('.activeImage').attr('data-id')).removeClass('activeBottomImage')
       $('#image'+id).removeClass('activeImage')
       $('#imageImg'+id).removeClass('activeImg')
       id++
+      $('#bottomImage'+id).addClass('activeBottomImage')
       $('#image'+id).addClass('activeImage')
       $('#imageImg'+id).addClass('activeImg')
     }
@@ -272,9 +331,11 @@ function fbPhoto(r,callback){
     bind('.preBtn',function(){
       var id = $('.activeImage').attr('data-id')
       if(id>0){
+        $('#bottomImage'+$('.activeImage').attr('data-id')).removeClass('activeBottomImage')
       $('#image'+id).removeClass('activeImage')
       $('#imageImg'+id).removeClass('activeImg')
       id--
+      $('#bottomImage'+id).addClass('activeBottomImage')
       $('#image'+id).addClass('activeImage')
       $('#imageImg'+id).addClass('activeImg')
     }
@@ -324,21 +385,50 @@ function fbFoursquarePhoto(r,callback){
   }
   render(".imageContainer", "image", r.fb.photos.data.length<=12?r.fb.photos.data:r.fb.photos.data.slice(0, 12));
   bind('.imageBlock',function(){
+    var shift = 0
+    var windowWidth = ($( window ).width()-80)
     $(".imageViewer").css('display','block')
     $('.carousalOverlay').css('display', 'block');
     $('.mainContainer').css('overflow-y', 'hidden');
     $(".imageViewer").get(0).scrollIntoView();
     render(".imageViewer", "imageViewer", {data:r.fb.photos.data})
+    var itemWidth = -$('.bottomImageBlock').width()*r.fb.photos.data.length/10 + 40 + $( window ).width()/20
+    $('#bottomImage'+$('.activeImage').attr('data-id')).removeClass('activeBottomImage')
     $('#imageImg'+$('.activeImage').attr('data-id')).removeClass('activeImg')
     $('#image'+$('.activeImage').attr('data-id')).removeClass('activeImage')
       $('#image'+$(this).attr('data-id')).addClass('activeImage')
       $('#imageImg'+$(this).attr('data-id')).addClass('activeImg')
+      $('#bottomImage'+$('.activeImage').attr('data-id')).addClass('activeBottomImage')
+      $( ".bottomImageContainer" ).mousemove(function( event ) {
+          var msg = "Handler for .mousemove() called at ";
+          msg += event.pageX + ", " + event.pageY;
+          console.log($('.bottomImageBlock').height()*r.fb.photos.data.length);
+          if(event.pageX > windowWidth && shift > itemWidth){
+            shift-=2
+            $( ".bottomImageContainer" ).css('left',shift+'rem')
+          }
+          if(event.pageX > 0 && event.pageX <70 && shift<-2 ){
+            shift+=2
+            $( ".bottomImageContainer" ).css('left',shift+'rem')
+          }
+        });
+      bind('.bottomImageBlock', function(){
+        var id = $(this).attr('data-id')
+        $('#bottomImage'+$('.activeImage').attr('data-id')).removeClass('activeBottomImage')
+        $(this).addClass('activeBottomImage')
+        $('#imageImg'+$('.activeImage').attr('data-id')).removeClass('activeImg')
+        $('#image'+$('.activeImage').attr('data-id')).removeClass('activeImage')
+          $('#image'+id).addClass('activeImage')
+          $('#imageImg'+id).addClass('activeImg')
+      })
       bind('.nextBtn',function(){
         var id = $('.activeImage').attr('data-id')
         if(id<r.fb.photos.data.length-1){
+          $('#bottomImage'+$('.activeImage').attr('data-id')).removeClass('activeBottomImage')
         $('#image'+id).removeClass('activeImage')
         $('#imageImg'+id).removeClass('activeImg')
         id++
+        $('#bottomImage'+id).addClass('activeBottomImage')
         $('#image'+id).addClass('activeImage')
         $('#imageImg'+id).addClass('activeImg')
       }
@@ -352,9 +442,11 @@ function fbFoursquarePhoto(r,callback){
       bind('.preBtn',function(){
         var id = $('.activeImage').attr('data-id')
         if(id>0){
+          $('#bottomImage'+$('.activeImage').attr('data-id')).removeClass('activeBottomImage')
         $('#image'+id).removeClass('activeImage')
         $('#imageImg'+id).removeClass('activeImg')
         id--
+        $('#bottomImage'+id).addClass('activeBottomImage')
         $('#image'+id).addClass('activeImage')
         $('#imageImg'+id).addClass('activeImg')
       }
@@ -362,17 +454,45 @@ function fbFoursquarePhoto(r,callback){
   })
   if(r.fb.photos.data.length>12){
   bind('.imageViewerTab', function(){
+    var shift = 0
+    var windowWidth = ($( window ).width()-80)
     $(".imageViewer").css('display','block')
     $('.carousalOverlay').css('display', 'block');
     $('.mainContainer').css('overflow-y', 'hidden');
     $(".imageViewer").get(0).scrollIntoView();
     render(".imageViewer", "imageViewer", {data:r.fb.photos.data})
+    var itemWidth = -$('.bottomImageBlock').width()*r.fb.photos.data.length/10 + 40 + $( window ).width()/20
+    $( ".bottomImageContainer" ).mousemove(function( event ) {
+        var msg = "Handler for .mousemove() called at ";
+        msg += event.pageX + ", " + event.pageY;
+        console.log($('.bottomImageBlock').height()*r.fb.photos.data.length);
+        if(event.pageX > windowWidth && shift > itemWidth){
+          shift-=2
+          $( ".bottomImageContainer" ).css('left',shift+'rem')
+        }
+        if(event.pageX > 0 && event.pageX <70 && shift<-2 ){
+          shift+=2
+          $( ".bottomImageContainer" ).css('left',shift+'rem')
+        }
+
+      });
+    bind('.bottomImageBlock', function(){
+      var id = $(this).attr('data-id')
+      $('#bottomImage'+$('.activeImage').attr('data-id')).removeClass('activeBottomImage')
+      $(this).addClass('activeBottomImage')
+      $('#imageImg'+$('.activeImage').attr('data-id')).removeClass('activeImg')
+      $('#image'+$('.activeImage').attr('data-id')).removeClass('activeImage')
+        $('#image'+id).addClass('activeImage')
+        $('#imageImg'+id).addClass('activeImg')
+    })
     bind('.nextBtn',function(){
       var id = $('.activeImage').attr('data-id')
       if(id<r.fb.photos.data.length-1){
+        $('#bottomImage'+$('.activeImage').attr('data-id')).removeClass('activeBottomImage')
       $('#image'+id).removeClass('activeImage')
       $('#imageImg'+id).removeClass('activeImg')
       id++
+      $('#bottomImage'+id).addClass('activeBottomImage')
       $('#image'+id).addClass('activeImage')
       $('#imageImg'+id).addClass('activeImg')
     }
@@ -386,9 +506,11 @@ function fbFoursquarePhoto(r,callback){
     bind('.preBtn',function(){
       var id = $('.activeImage').attr('data-id')
       if(id>0){
+        $('#bottomImage'+$('.activeImage').attr('data-id')).removeClass('activeBottomImage')
       $('#image'+id).removeClass('activeImage')
       $('#imageImg'+id).removeClass('activeImg')
       id--
+      $('#bottomImage'+id).addClass('activeBottomImage')
       $('#image'+id).addClass('activeImage')
       $('#imageImg'+id).addClass('activeImg')
     }
