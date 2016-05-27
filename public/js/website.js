@@ -140,7 +140,8 @@ function foursquarePhoto(r,callback){
     $('.carousalOverlay').css('display', 'block');
     $('.mainContainer').css('overflow-y', 'hidden');
     $(".imageViewer").get(0).scrollIntoView();
-    render(".imageViewer", "imageViewer", {data:r.fb.photos.data})
+    render(".imageViewer", "imageViewer", {data:r.fb.photos.data});
+    render(".imageBlock", "imageViewer", {data:r.fb.photos.data});
     bind('.nextBtn',function(){
       var id = $('.activeImage').attr('data-id')
       if(id<r.fb.photos.data.length-1){

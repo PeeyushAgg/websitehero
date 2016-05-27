@@ -54,6 +54,7 @@ input[type=number]::-webkit-outter-spin-button {
   z-index: 10;
   text-transform: uppercase;
   font-size: 1.2rem;
+  z-index: 600;
   .widgetNew {
     position: absolute;
     right: 0;
@@ -1547,7 +1548,7 @@ input[type=number]::-webkit-outter-spin-button {
   display: none;
   .image {
     height: 0;
-    max-height: 58rem;
+    max-height: 40rem;
     max-width: 85rem;
   }
   .activeImg {
@@ -1555,6 +1556,26 @@ input[type=number]::-webkit-outter-spin-button {
   }
   .activeImage {
     height: auto;
+  }
+  .bottomImageContainer {
+    position: absolute;
+    bottom: 0;
+    height: 10rem;
+    left: 0;
+    right: 0;
+    min-width: 100%;
+    overflow: hidden;
+    display: -webkit-inline-box;
+    .bottomImageBlock {
+      position: relative;
+      float: left;
+      height: 100%;
+      width: 12rem;
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: cover;
+      border-right: 1px solid rgba(128, 128, 128, 0.4);
+    }
   }
   .preBtn {
     position: absolute;

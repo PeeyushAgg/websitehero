@@ -533,12 +533,18 @@
       </div>
       </script>
       <script id='paralexPageTemplate' type="text/x-jquery-tmpl">
-      <div class="paralexPageOne" style='background : url("{{html image}}") 50% 0 fixed; background-repeat: no-repeat; background-size: cover;'>
+      <div class="paralexPageOne" style='background-image : url("{{html image}}"); background-repeat: no-repeat; background-size: cover;'>
       </div>
       </script>
       <script id='imageViewerTemplate' type="text/x-jquery-tmpl">
       <div class="preBtn"></div>
       <div class="cross"> <img src="../images/cross.png" class="crossIcon"></div>
+      <div class="bottomImageContainer">
+      {{each(index,value) data}}
+        <div class="bottomImageBlock" id='#bottomImg{{html count}}' style='background-image : url("{{html images[3]?images[3].source:images[0].source}}")'>
+        </div>
+        {{/each}}
+      </div>
       <div class="viewer">
       {{each(index,value) data}}
       {{if (count==0)}}
