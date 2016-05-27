@@ -296,6 +296,7 @@ function fbPhoto(r,callback){
     $('.mainContainer').css('overflow-y', 'hidden');
     $(".imageViewer").get(0).scrollIntoView();
     render(".imageViewer", "imageViewer", {data:r.fb.photos.data})
+
     var itemWidth = -$('.bottomImageBlock').width()*r.fb.photos.data.length/10 + 40 + $( window ).width()/20
     $( ".bottomImageContainer" ).mousemove(function( event ) {
         var msg = "Handler for .mousemove() called at ";
