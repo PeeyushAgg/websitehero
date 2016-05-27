@@ -321,7 +321,7 @@
       </div>
       </script>
       <script id="imageTemplate" type="text/x-jquery-tmpl">
-      {{if (count<11)}} <div class="col-sm-3 col-xs-12 overlay">
+      {{if (count<11)}} <div class="col-sm-3 col-xs-12 overlay  imageBlock" data-id="{{html count}}">
         <div class="block" style="background-image: url('{{html images[3]?images[3].source:images[0].source}}')">
         </div>
         </div>

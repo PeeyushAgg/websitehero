@@ -206,6 +206,43 @@ function fbPhoto(r,callback){
   }
   console.log(r.fb.photos.data[11])
   render(".imageContainer", "image", r.fb.photos.data.length<=12?r.fb.photos.data:r.fb.photos.data.slice(0, 12));
+  bind('.imageBlock',function(){
+    $(".imageViewer").css('display','block')
+    $('.carousalOverlay').css('display', 'block');
+    $('.mainContainer').css('overflow-y', 'hidden');
+    $(".imageViewer").get(0).scrollIntoView();
+    render(".imageViewer", "imageViewer", {data:r.fb.photos.data})
+    $('#imageImg'+$('.activeImage').attr('data-id')).removeClass('activeImg')
+    $('#image'+$('.activeImage').attr('data-id')).removeClass('activeImage')
+      $('#image'+$(this).attr('data-id')).addClass('activeImage')
+      $('#imageImg'+$(this).attr('data-id')).addClass('activeImg')
+      bind('.nextBtn',function(){
+        var id = $('.activeImage').attr('data-id')
+        if(id<r.fb.photos.data.length-1){
+        $('#image'+id).removeClass('activeImage')
+        $('#imageImg'+id).removeClass('activeImg')
+        id++
+        $('#image'+id).addClass('activeImage')
+        $('#imageImg'+id).addClass('activeImg')
+      }
+      })
+      bind('.cross', function(){
+        $('.imageViewer').css('display','none');
+        $('.carousalOverlay').css('display', 'none');
+        $('.mainContainer').css('overflow-y', 'visible');
+        $(".imageContainer").get(0).scrollIntoView();
+      })
+      bind('.preBtn',function(){
+        var id = $('.activeImage').attr('data-id')
+        if(id>0){
+        $('#image'+id).removeClass('activeImage')
+        $('#imageImg'+id).removeClass('activeImg')
+        id--
+        $('#image'+id).addClass('activeImage')
+        $('#imageImg'+id).addClass('activeImg')
+      }
+      })
+  })
   if(r.fb.photos.data.length>12){
   bind('.imageViewerTab', function(){
     $(".imageViewer").css('display','block')
@@ -282,8 +319,44 @@ function fbFoursquarePhoto(r,callback){
   if(r.fb.photos.data.length>12){
     r.fb.photos.data[11].total = r.fb.photos.data.length
   }
-  console.log(r.fb.photos.data[11])
   render(".imageContainer", "image", r.fb.photos.data.length<=12?r.fb.photos.data:r.fb.photos.data.slice(0, 12));
+  bind('.imageBlock',function(){
+    $(".imageViewer").css('display','block')
+    $('.carousalOverlay').css('display', 'block');
+    $('.mainContainer').css('overflow-y', 'hidden');
+    $(".imageViewer").get(0).scrollIntoView();
+    render(".imageViewer", "imageViewer", {data:r.fb.photos.data})
+    $('#imageImg'+$('.activeImage').attr('data-id')).removeClass('activeImg')
+    $('#image'+$('.activeImage').attr('data-id')).removeClass('activeImage')
+      $('#image'+$(this).attr('data-id')).addClass('activeImage')
+      $('#imageImg'+$(this).attr('data-id')).addClass('activeImg')
+      bind('.nextBtn',function(){
+        var id = $('.activeImage').attr('data-id')
+        if(id<r.fb.photos.data.length-1){
+        $('#image'+id).removeClass('activeImage')
+        $('#imageImg'+id).removeClass('activeImg')
+        id++
+        $('#image'+id).addClass('activeImage')
+        $('#imageImg'+id).addClass('activeImg')
+      }
+      })
+      bind('.cross', function(){
+        $('.imageViewer').css('display','none');
+        $('.carousalOverlay').css('display', 'none');
+        $('.mainContainer').css('overflow-y', 'visible');
+        $(".imageContainer").get(0).scrollIntoView();
+      })
+      bind('.preBtn',function(){
+        var id = $('.activeImage').attr('data-id')
+        if(id>0){
+        $('#image'+id).removeClass('activeImage')
+        $('#imageImg'+id).removeClass('activeImg')
+        id--
+        $('#image'+id).addClass('activeImage')
+        $('#imageImg'+id).addClass('activeImg')
+      }
+      })
+  })
   if(r.fb.photos.data.length>12){
   bind('.imageViewerTab', function(){
     $(".imageViewer").css('display','block')
